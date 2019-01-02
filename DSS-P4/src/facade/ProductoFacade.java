@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import servidor.Db;
-import servidor.Farmacia;
+import servidor.Producto;
 
-public class FarmaciaFacade {
+public class ProductoFacade {
 	
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -19,7 +19,7 @@ public class FarmaciaFacade {
 	
 	PreparedStatement pstmt = null;
 	
-	public FarmaciaFacade() {
+	public ProductoFacade() {
 		try {
 			this.database = new Db();
 			this.con = this.database.getDB();
@@ -37,18 +37,19 @@ public class FarmaciaFacade {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean newProducto(Producto p) {
+		String insertarProducto = "INSERT INTO PRODUCTO"
+				+ "(NOMBRE,CANTIDAD,PRECIO,IMAGEN) VALUES"
+				+ "(?,?,?,?)";
+		System.out.println(insertarProducto);
 
-	public boolean newFarmacia(Farmacia f) {
-		String insertarFarmacia = "INSERT INTO FARMACIA"
-				+ "(NOMBRE,LATITUD,LONGITUD) VALUES"
-				+ "(?,?,?)";
-		System.out.println(insertarFarmacia);
-
 		try {
-			pstmt = this.con.prepareStatement(insertarFarmacia);
-			pstmt.setString(1, f.getNombre());
-			pstmt.setFloat(2, f.getLatitud());
-			pstmt.setFloat(3, f.getLongitud());
+			pstmt = this.con.prepareStatement(insertarProducto);
+			pstmt.setString(1, p.getNombre());
+			pstmt.setInt(2, p.getCantidad());
+			pstmt.setInt(3, p.getPrecio());
+			pstmt.setString(4, p.getImagen());
 			
 			pstmt.execute();
 			this.con.close();
@@ -61,15 +62,16 @@ public class FarmaciaFacade {
 		return false;
 	}
 	
-	public boolean updateFarmacia(Farmacia f) {
+	public boolean updateProducto(Producto p) {
 		
-		String updateFarmacia = "UPDATE FARMACIA SET NOMBRE=?, LATITUD=?, LONGITUD=? where ID=?";
+		String updateProducto = "UPDATE PRODUCTO SET NOMBRE=?, CANTIDAD=?, PRECIO=?, IMAGEN=? where ID=?";
 		try {
-			pstmt= this.con.prepareStatement(updateFarmacia);
-			pstmt.setString(1, f.getNombre());
-			pstmt.setFloat(2, f.getLatitud());
-			pstmt.setFloat(3, f.getLongitud());
-			pstmt.setInt(4, f.getID());
+			pstmt= this.con.prepareStatement(updateProducto);
+			pstmt.setString(1, p.getNombre());
+			pstmt.setInt(2, p.getCantidad());
+			pstmt.setInt(3, p.getPrecio());
+			pstmt.setString(4, p.getImagen());
+			pstmt.setInt(5, p.getID());
 			pstmt.execute();
 			
 			this.con.close();
@@ -81,12 +83,12 @@ public class FarmaciaFacade {
 		return false;
 	}
 	
-	public boolean deleteFarmacia(Farmacia f) {
+	public boolean deleteProducto(Producto p) {
 		
-		String deleteFarmacia = "DELETE FROM FARMACIA WHERE ID=?";
+		String deleteProducto = "DELETE FROM PRODUCTO WHERE ID=?";
 		try {
-			pstmt= this.con.prepareStatement(deleteFarmacia);
-			pstmt.setInt(1, f.getID());
+			pstmt= this.con.prepareStatement(deleteProducto);
+			pstmt.setInt(1, p.getID());
 			pstmt.execute();
 			
 			this.con.close();
@@ -98,21 +100,23 @@ public class FarmaciaFacade {
 		return false;
 	}
 	
-	public ArrayList<Farmacia> getFarmacias(){
-		String getUsers = "SELECT * FROM FARMACIA";
-		ArrayList<Farmacia> farmacias= new ArrayList<Farmacia>();
+	public ArrayList<Producto> getProductos(){
+		String getUsers = "SELECT * FROM PRODUCTO";
+		ArrayList<Producto> productos= new ArrayList<Producto>();
 		
 		try {
 			stmt = this.con.createStatement();
 			this.rs = stmt.executeQuery(getUsers);
 			
 			while(rs.next()) {
-				farmacias.add(new Farmacia(rs.getInt("ID"),rs.getString("NOMBRE"),rs.getFloat("LATITUD"),rs.getFloat("LONGITUD")));
+				productos.add(new Producto(rs.getInt("ID"),rs.getString("NOMBRE"),rs.getInt("CANTIDAD"),rs.getInt("PRECIO"),rs.getString("IMAGEN")));
 			}
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return farmacias;
+		return productos;
 	}
+	
+	
 }
