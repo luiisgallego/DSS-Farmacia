@@ -2,26 +2,37 @@ package servidor;
 
 public class Usuario {
 	
+	private int ID;
 	private String nick;
 	private String nombre;
-	private int edad;
+	private String rol;
 	private String email;
 	private String pass;
 	
 	public Usuario () {
+		this.ID = 0;
 		this.nick = "#";
 		this.nombre = "#";
-		this.edad = 0;
+		this.rol = "#";
 		this.email = "#";
 		this.pass = "#";
 	}
 	
-	public Usuario (String nick, String nombre, int edad, String email, String pass) {
+	public Usuario (int ID, String nick, String nombre, String rol, String email, String pass) {
+		this.ID = ID;
 		this.nick = nick;
 		this.nombre = nombre;
-		this.edad = edad;
+		this.rol = rol;
 		this.email = email;
 		this.pass = pass;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 
 	public String getNick() {
@@ -40,12 +51,12 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public int getEdad() {
-		return edad;
+	public String getRol() {
+		return rol;
 	}
 
-	public void setEdad(int edad) {
-		this.edad = edad;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	public String getEmail() {
@@ -66,9 +77,10 @@ public class Usuario {
 	
 //	@Override
 //	public String toString() {
-//		String salida = "NICK = " + this.nick +
+//		String salida = "ID = " + this.ID +
+//						" NICK = " + this.nick +
 //						" NOMBRE = " + this.nombre +
-//						" EDAD = " + this.edad +
+//						" ROL = " + this.rol +
 //						" EMAIL = " + this.email +
 //						" PASSWORD = " + this.pass; 
 //		return salida;

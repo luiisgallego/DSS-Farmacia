@@ -4,12 +4,24 @@ public class Producto {
 	
 	private int ID;
 	private String nombre;
-	private String descripcion;
+	private int cantidad;
+	private int precio;
+	private String imagen;
 	
 	public Producto() {
 		this.ID = 0;
 		this.nombre = "#";
-		this.descripcion = "#";
+		this.cantidad = 0;
+		this.precio = 0;
+		this.imagen = null;
+	}
+	
+	public Producto(int ID, String nombre, int cantidad, int precio, String imagen) {
+		this.ID = ID;
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.precio = precio;
+		this.imagen = imagen;
 	}
 	
 	public int getID() {
@@ -28,18 +40,28 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public int getCantidad() {
+		return cantidad;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	
+	public int getPrecio() {
+		return precio;
 	}
 
-	public Producto(int ID, String nombre, String descripcion) {
-		this.ID = ID;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 	
 //	@Override
