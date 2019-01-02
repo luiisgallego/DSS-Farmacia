@@ -27,14 +27,14 @@ public class Db {
 			 * Statement: objeto utilizado para ejecutar una instrucción SQL estática y devolver los resultados que produce
 			 * Result: Recoge el resultado. Solo podemos tener uno por statement.
 			 */
-			System.out.println("------REALIZAMOS UNA PRUEBA------");
+			/*System.out.println("------REALIZAMOS UNA PRUEBA------");
 			Statement statement = this.connection.createStatement();
 			ResultSet result = statement.executeQuery("SELECT * FROM farmacia;");
-			System.out.println("------FIN PRUEBA------");
 			
 			while(result.next()){
 				System.out.println(result.getString(1) + "   " + result.getString(2) + "   " +result.getString(3) + "   " +result.getString(4));
 			}
+			System.out.println("------FIN PRUEBA------");*/
 			
 		}catch(SQLException ex) {
 			System.out.println("-----ERROR SQL-----");
