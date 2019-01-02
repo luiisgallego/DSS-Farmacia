@@ -15,11 +15,15 @@ public class Db {
 
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		try {
+			System.out.println("------CONECTANDO BD------");
 			this.connection = DriverManager.getConnection(url, username,password);
 		}catch(SQLException ex) {
+			System.out.println("-----ERROR SQL-----");
 		    System.out.println("SQLException: " + ex.getMessage());
 		    System.out.println("SQLState: " + ex.getSQLState());
 		    System.out.println("VendorError: " + ex.getErrorCode());
+		} catch(Exception e){
+			System.out.println("-----ERROR CONEXIÓN BD-----");
 		}
 		
 	}
