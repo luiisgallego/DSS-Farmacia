@@ -7,7 +7,8 @@ import java.sql.SQLException;
 public class Db {
 	String url = "jdbc:mysql://localhost:3306/consorcio";
 	String username = "root";
-	String password = "";
+	String password = "root";
+	//String password = "";
 	
 	private Connection connection;
 

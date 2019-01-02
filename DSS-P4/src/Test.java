@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 import javax.ws.rs.core.UriBuilder;
 
 import com.sun.jersey.api.client.Client;
@@ -6,11 +8,12 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 
+import servidor.Db;
 import servidor.Db2;
 
 public class Test {
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
 		//Producto p = new Producto(9999, "producto json");
 		
@@ -20,7 +23,7 @@ public class Test {
 		
 		WebResource servicio = client.resource(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build());*/
 		
-		Db2 bd = new Db2();
+		Db bd = new Db();
 		
 	}
 
