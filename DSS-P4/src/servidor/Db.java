@@ -13,7 +13,7 @@ public class Db {
 
 	public Db() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
-		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		try {
 			System.out.println("------CONECTANDO BD------");
 			this.connection = DriverManager.getConnection(url, username,password);
