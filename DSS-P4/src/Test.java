@@ -9,7 +9,6 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 
 import servidor.Db;
-import servidor.Db2;
 
 public class Test {
 	
@@ -26,5 +25,4 @@ public class Test {
 		Db bd = new Db();
 		
 	}
-
 }
