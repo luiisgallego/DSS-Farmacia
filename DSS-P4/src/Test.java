@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.ws.rs.core.UriBuilder;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -29,15 +30,16 @@ public class Test {
 			System.out.println(f.getID() + " " + f.getNombre());
 		}*/
 		
+		// Prueba 3
+		Farmacia farmacia = new Farmacia(5000, "PruebaFarmacia", 17, 25);
 		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
 		
 		WebResource servicio = client.resource(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build());
 		
-		
-		
-		
+		ClientResponse respuesta = servicio.path("farmacias").accept("application/json").type("application/json").put(ClientResponse.class, farmacia);
+		System.out.println(respuesta.getEntity(String.class));
 		
 		
 	}
