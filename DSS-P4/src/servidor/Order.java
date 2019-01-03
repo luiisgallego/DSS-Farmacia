@@ -4,24 +4,24 @@ public class Order {
 	
 	private int ID;
 	private int precio;
-	private Usuario usuario;
-	private Producto producto;
-	private Farmacia farmacia;
+	private int productoID;
+	private int farmaciaID;
+	private int usuarioID;
 	
 	public Order () {
 		this.ID = 0;
 		this.precio = 0;
-		this.usuario = new Usuario();
-		this.producto = new Producto();
-		this.farmacia = new Farmacia();
+		this.usuarioID = 0;
+		this.productoID = 0; 
+		this.farmaciaID = 0; 
 	}
 	
-	public Order (int ID, int precio, Usuario usuario, Producto producto, Farmacia farmacia) {
+	public Order (int ID, int precio, int usuarioID, int productoID, int farmaciaID) {
 		this.ID = ID;
 		this.precio = precio;
-		this.usuario = usuario;
-		this.producto = producto;
-		this.farmacia = farmacia;
+		this.usuarioID = usuarioID;
+		this.productoID = productoID;
+		this.farmaciaID = farmaciaID;
 	}
 
 	public int getID() {
@@ -40,37 +40,39 @@ public class Order {
 		this.precio = precio;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public int getProductoID() {
+		return productoID;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setProductoID(int productoID) {
+		this.productoID = productoID;
 	}
 
-	public Producto getProducto() {
-		return producto;
+	public int getFarmaciaID() {
+		return farmaciaID;
 	}
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setFarmaciaID(int farmaciaID) {
+		this.farmaciaID = farmaciaID;
 	}
+
+	public int getUsuarioID() {
+		return usuarioID;
+	}
+
+	public void setUsuarioID(int usuarioID) {
+		this.usuarioID = usuarioID;
+	}
+
 	
-	public Farmacia getFarmacia() {
-		return farmacia;
-	}
-
-	public void setFarmacia(Farmacia farmacia) {
-		this.farmacia = farmacia;
-	}
 	
 //	@Override
 //	public String toString() {
 //		String salida = "ID = " + this.ID +
 //						" PRECIO = " + this.precio +
-//						" USUARIO = " + this.usuario.getNombre() +
-//						" PRODUCTO = " + this.producto.getNombre() + 
-//						" FARMACIA = " + this.farmacia.getNombre();
+//						" FK_USUARIO = " + this.usuarioID +
+//						" FK_PRODUCTO = " + this.productoID + 
+//						" FK_FARMACIA = " + this.farmaciaID;
 //		return salida;
 //				
 //	}
