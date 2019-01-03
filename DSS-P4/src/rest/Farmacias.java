@@ -21,6 +21,7 @@ import facade.FarmaciaFacade;
 public class Farmacias {
 	
 	private FarmaciaFacade farmaciaFacade;
+	private Gson gson = new Gson();
 	
 	public Farmacias(){
 		farmaciaFacade = new FarmaciaFacade();
@@ -37,14 +38,12 @@ public class Farmacias {
 	
 	@GET	
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ArrayList<servidor.Farmacia> getFarmacias(){
+	public String getFarmacias(){
 		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
 		// Antes de devolver este array, habr� que pasarlo a JSON
 		// https://kodejava.org/how-do-i-convert-array-into-json/
-		
-		
-		
-		return farmacias;
+		String farmaciasJSON = gson.toJson(farmacias);
+		return farmaciasJSON;	
 	}
 	
 
