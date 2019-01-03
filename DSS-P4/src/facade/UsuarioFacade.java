@@ -85,7 +85,7 @@ public class UsuarioFacade {
 		return false;
 	}
 	
-	public boolean deleteProducto(Usuario u) {
+	public boolean deleteUsuario(Usuario u) {
 		
 		String deleteUsuario = "DELETE FROM USER WHERE ID=?";
 		try {
