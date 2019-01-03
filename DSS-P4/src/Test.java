@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ws.rs.core.UriBuilder;
 
@@ -8,21 +9,36 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 
+import facade.FarmaciaFacade;
 import servidor.Db;
+import servidor.Farmacia;
 
 public class Test {
 	
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		
-		//Producto p = new Producto(9999, "producto json");
+		// Prueba 1
+		// Db bd = new Db();
 		
-		/*ClientConfig clientConfig = new DefaultClientConfig();
+		// Prueba 2
+		/*FarmaciaFacade farmaciaFacade = new FarmaciaFacade();
+		ArrayList<Farmacia> farmacias = farmaciaFacade.getFarmacias();
+		
+		for(Farmacia f: farmacias){
+			System.out.println("FARMACIAS:");
+			System.out.println(f.getID() + " " + f.getNombre());
+		}*/
+		
+		ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
 		
-		WebResource servicio = client.resource(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build());*/
+		WebResource servicio = client.resource(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build());
 		
-		Db bd = new Db();
+		
+		
+		
+		
 		
 	}
 }
