@@ -10,6 +10,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+// https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.2/ --> Para importar la libreria
+import com.google.gson.Gson;
+
 import facade.FarmaciaFacade;
 
 @Path("/farmacias")
@@ -34,6 +37,11 @@ public class Farmacias {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ArrayList<servidor.Farmacia> getFarmcias(){
 		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
+		// Antes de devolver este array, habrá que pasarlo a JSON
+		// https://kodejava.org/how-do-i-convert-array-into-json/
+		
+		
+		
 		return farmacias;
 	}
 	
