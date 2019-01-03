@@ -1,6 +1,7 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
 import com.sun.jersey.api.client.Client;
@@ -38,8 +39,11 @@ public class Test {
 		
 		WebResource servicio = client.resource(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build());
 		
-		ClientResponse respuesta = servicio.path("farmacias").accept("application/json").type("application/json").put(ClientResponse.class, farmacia);
-		System.out.println(respuesta.getEntity(String.class));
+		System.out.println("Farmacias actuales: ");
+		System.out.println(servicio.path("farmacias").accept(MediaType.APPLICATION_JSON).get(String.class));	
+		
+		//ClientResponse respuesta = servicio.path("farmacias").accept("application/json").type("application/json").put(ClientResponse.class, farmacia);
+		//System.out.println(respuesta.getEntity(String.class));
 		
 		
 	}

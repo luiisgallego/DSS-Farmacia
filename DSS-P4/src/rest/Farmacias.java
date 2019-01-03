@@ -1,6 +1,7 @@
 package rest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 // https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.2/ --> Para importar la libreria
 import com.google.gson.Gson;
+
 
 import facade.FarmaciaFacade;
 
@@ -35,9 +37,9 @@ public class Farmacias {
 	
 	@GET	
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ArrayList<servidor.Farmacia> getFarmcias(){
+	public ArrayList<servidor.Farmacia> getFarmacias(){
 		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
-		// Antes de devolver este array, habrá que pasarlo a JSON
+		// Antes de devolver este array, habrï¿½ que pasarlo a JSON
 		// https://kodejava.org/how-do-i-convert-array-into-json/
 		
 		
