@@ -11,11 +11,11 @@ public class Usuario {
 	
 	public Usuario () {
 		this.ID = 0;
-		this.nick = "#";
-		this.nombre = "#";
-		this.rol = "#";
-		this.email = "#";
-		this.pass = "#";
+		this.nick = null;
+		this.nombre = null;
+		this.rol = null;
+		this.email = null;
+		this.pass = null;
 	}
 	
 	public Usuario (int ID, String nick, String nombre, String rol, String email, String pass) {
@@ -74,16 +74,4 @@ public class Usuario {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	
-//	@Override
-//	public String toString() {
-//		String salida = "ID = " + this.ID +
-//						" NICK = " + this.nick +
-//						" NOMBRE = " + this.nombre +
-//						" ROL = " + this.rol +
-//						" EMAIL = " + this.email +
-//						" PASSWORD = " + this.pass; 
-//		return salida;
-//				
-//	}
 }
