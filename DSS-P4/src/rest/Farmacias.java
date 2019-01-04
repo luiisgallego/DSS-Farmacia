@@ -27,10 +27,10 @@ import servidor.Farmacia;
 public class Farmacias {
 	
 	private FarmaciaFacade farmaciaFacade;
-	//private Gson gson = new Gson();
+	private Gson gson = new Gson();
 	
-	public Farmacias(){
-		farmaciaFacade = new FarmaciaFacade();
+	public Farmacias(){ 
+		farmaciaFacade = new FarmaciaFacade(); 
 	}
 	
 	@POST	// CREAR
@@ -44,32 +44,29 @@ public class Farmacias {
 		Farmacia farmacia = new Farmacia(0, nombre, latitud, longitud); 
 		boolean putOK = farmaciaFacade.newFarmacia(farmacia);
 		
+		// Redirigir ??
 		servletResponse.sendRedirect("../rest/farmacias");
 		
-		//if(putOK) return Response.status(200).entity("PutOK farmcia").build();
+		//if(putOK) return Response.status(200).entity("PutOK farmacia").build();
 		//else return Response.status(404).entity("Error PUT farmacia").build();		
 	}
 	
-	@PUT	// INSERTAR
+	/*@PUT	// INSERTAR
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response putFarmacia(servidor.Farmacia farmacia){
 		boolean putOK = farmaciaFacade.newFarmacia(farmacia);
 		
 		if(putOK) return Response.status(200).entity("PutOK farmcia").build();
 		else return Response.status(404).entity("Error PUT farmacia").build();
-	}
+	}*/
 	
+	//@Path("/getFarmacias") // En get no debería ser necesario
 	@GET	
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/getFarmacias")
-	public ArrayList<servidor.Farmacia> getFarmacias(){
+	public Response getFarmacias(){
 		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
-		// Antes de devolver este array, habr� que pasarlo a JSON
-		// https://kodejava.org/how-do-i-convert-array-into-json/
-		//String farmaciasJSON = gson.toJson(farmacias);
-		//return farmaciasJSON;	
-		return farmacias;
+		String farmaciasJSON = gson.toJson(farmacias);
+		return Response.status(200).entity(farmaciasJSON).build();
+		//return farmacias;
 	}
-	
-
 }

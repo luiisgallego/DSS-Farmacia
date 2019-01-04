@@ -26,8 +26,17 @@ public class Usuarios {
 		usuarioFacade = new UsuarioFacade();
 	}
 	
+	@POST
+	@Consumes( MediaType.APPLICATION_JSON )
+	public Response updateUsuario(servidor.Usuario usuario) {
+		boolean updateOK = usuarioFacade.updateUsuario(usuario);
+		
+		if(updateOK) return Response.status(200).entity("UpdateOK usuario").build();
+		else return Response.status(404).entity("Error POST usuario").build();
+	}
+	
 	@GET	
-	@Produces({ MediaType.APPLICATION_JSON })
+	@Produces( MediaType.APPLICATION_JSON )
 	public String getUsuarios(){
 		ArrayList<servidor.Usuario> usuarios = usuarioFacade.getUsuarios();
 		// Tenemos que pasar los usuarios a JSON
@@ -35,7 +44,7 @@ public class Usuarios {
 		return usuariosJSON;
 	}
 	
-	@PUT	
+	/*@PUT	
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response putUsuario(servidor.Usuario usuario){
 		boolean putOK = usuarioFacade.newUsuario(usuario);
@@ -51,14 +60,6 @@ public class Usuarios {
 		
 		if(deleteOK) return Response.status(200).entity("DeleteOK usuario").build();
 		else return Response.status(404).entity("Error DELETE usuario").build();
-	}
+	}*/	
 	
-	@POST
-	@Consumes({ MediaType.APPLICATION_JSON})
-	public Response updateUsuario(servidor.Usuario usuario) {
-		boolean updateOK = usuarioFacade.updateUsuario(usuario);
-		
-		if(updateOK) return Response.status(200).entity("UpdateOK usuario").build();
-		else return Response.status(404).entity("Error POST usuario").build();
-	}
 }
