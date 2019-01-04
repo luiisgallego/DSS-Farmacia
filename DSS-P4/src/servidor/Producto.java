@@ -10,7 +10,7 @@ public class Producto {
 	
 	public Producto() {
 		this.ID = 0;
-		this.nombre = "#";
+		this.nombre = null;
 		this.cantidad = 0;
 		this.precio = 0;
 		this.imagen = null;
@@ -62,15 +62,5 @@ public class Producto {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
-	}
-	
-//	@Override
-//	public String toString() {
-//		String salida = "ID = " + this.ID +
-//						" NOMBRE = " + this.nombre +
-//						" DESCRIPCIÓN = " + this.descripcion;
-//		return salida;
-//				
-//	}
-		
+	}		
 }

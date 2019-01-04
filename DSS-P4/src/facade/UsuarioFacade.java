@@ -41,7 +41,7 @@ public class UsuarioFacade {
 		// Tenemos el String donde va la entrada equivalente en SQL
 		String insertarUsuario = "INSERT INTO USER"
 				+ "(NOMBRE,NICK,ROL,EMAIL,PASS) VALUES"
-				+ "(?,?,?,?,?)"; // Dejamos en ? los valores que tendrá
+				+ "(?,?,?,?,?)"; // Dejamos en ? los valores que tendrï¿½
 		System.out.println(insertarUsuario);
 
 		try {
@@ -51,13 +51,12 @@ public class UsuarioFacade {
 			pstmt.setString(3, u.getRol());
 			pstmt.setString(4, u.getEmail());
 			pstmt.setString(5, u.getPass());
-			// Después de esto tenemos la entrada en SQL totalmente completa.
+			// Despuï¿½s de esto tenemos la entrada en SQL totalmente completa.
 			pstmt.execute(); // Por lo que la ejecutamos.
 			this.con.close();
 			return true;
 		}catch(SQLException e) {
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		}
 		
 		return false;

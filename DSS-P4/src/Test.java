@@ -32,19 +32,17 @@ public class Test {
 		}*/
 		
 		// Prueba 3
-		Farmacia farmacia = new Farmacia(5000, "PruebaFarmacia", 17, 25);
-		ClientConfig clientConfig = new DefaultClientConfig();
+		/*ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
-		
 		WebResource servicio = client.resource(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build());
 		
-		System.out.println("Farmacias actuales: ");
-		System.out.println(servicio.path("farmacias").accept(MediaType.APPLICATION_JSON).get(String.class));	
+		//System.out.println("Farmacias actuales: ");
+		//System.out.println(servicio.path("farmacias").accept(MediaType.APPLICATION_JSON).get(String.class));	
 		
-		//ClientResponse respuesta = servicio.path("farmacias").accept("application/json").type("application/json").put(ClientResponse.class, farmacia);
-		//System.out.println(respuesta.getEntity(String.class));
-		
+		Farmacia farmacia = new Farmacia(5000, "PruebaFarmacia", 17, 25);
+		ClientResponse respuesta = servicio.path("farmacias").accept("application/json").type("application/json").put(ClientResponse.class, farmacia);
+		System.out.println(respuesta.getEntity(String.class));*/		
 		
 	}
 }
