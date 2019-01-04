@@ -16,5 +16,9 @@
 			<input name="farmaciaLongitud"><br/>
 			<input type="submit" value="Guardar" />
 		</form>
+		<form action="../DSS-P4/rest/farmacias/getFarmacias" >
+			<input name="prueba" value="5"><br/>
+   			<input type="submit" value="Ver listado de farmcias" />
+		</form>
 	</body>
 </html>

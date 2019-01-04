@@ -61,6 +61,7 @@ public class Farmacias {
 	
 	@GET	
 	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/getFarmacias")
 	public ArrayList<servidor.Farmacia> getFarmacias(){
 		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
 		// Antes de devolver este array, habr� que pasarlo a JSON
