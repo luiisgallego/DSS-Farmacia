@@ -65,7 +65,6 @@ public class Main extends AppCompatActivity {
             }
         });
 
-
     }
 
     private boolean emptyValidation() {
