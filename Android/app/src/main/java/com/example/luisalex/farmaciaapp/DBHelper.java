@@ -14,14 +14,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE USUARIOS (ID INTERGER PRIMARY KEY AUTOINCREMENT,NICK TEXT,PASS TEXT)");
-        db.execSQL("INSERT INTO USUARIOS VALUES('ADMIN','ADMIN')");
+        db.execSQL("CREATE TABLE USUARIOS (ID INTEGER PRIMARY KEY AUTOINCREMENT,NICK TEXT NOT NULL,PASS TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("CREATE TABLE USUARIOS (ID INTERGER PRIMARY KEY AUTOINCREMENT,NICK TEXT,PASS TEXT)");
-        db.execSQL("INSERT INTO USUARIOS VALUES('ADMIN','ADMIN')");
+        // Borramos la tabla antigua
+        db.execSQL("DROP TABLE IF EXISTS USUARIOS" );
+        // Creamos la tabla de nuevo
+        onCreate(db);
     }
 
     public Usuario obtenerUsuario(String nick, String pass){

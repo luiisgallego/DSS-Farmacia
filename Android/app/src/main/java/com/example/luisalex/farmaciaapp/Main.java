@@ -26,7 +26,7 @@ public class Main extends AppCompatActivity {
         botonSignUp = findViewById(R.id.botonSignUp);
 
         textNick = findViewById(R.id.nickinput);
-        textPass = findViewById(R.id.passwinput);
+        textPass = findViewById(R.id.passinput);
 
         final DBHelper dbHelper = new DBHelper(this,"Base Datos",null,1);
 
@@ -51,16 +51,16 @@ public class Main extends AppCompatActivity {
                     if (user != null) {
                         Bundle mBundle = new Bundle();
                         mBundle.putString("Usuario", user.getNick());
-                        Intent intent = new Intent(Main.this, UserActivity.class);
+                        Intent intent = new Intent(Main.this, ActividadUsuario.class);
                         intent.putExtras(mBundle);
                         startActivity(intent);
-                        Toast.makeText(MainActivity.this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Main.this, "Bienvenido " + user.getNick(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MainActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Main.this, "Usuario inexistente", Toast.LENGTH_SHORT).show();
                         textPass.setText("");
                     }
                 }else{
-                    Toast.makeText(MainActivity.this, "Empty Fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Main.this, "Campos vacíos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
