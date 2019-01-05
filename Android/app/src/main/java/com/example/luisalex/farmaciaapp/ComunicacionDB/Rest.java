@@ -13,22 +13,46 @@ import java.net.URL;
 
 //https://code.tutsplus.com/es/tutorials/android-from-scratch-using-rest-apis--cms-27117
 public class Rest {
-    private HttpURLConnection conexion;
-    private JsonReader jsonReader;
 
     public Rest() throws IOException {
 
+    }
 
-
-        URL url = new URL("http://localhost:8080/DSS-P4/rest/farmacias");
-        this.conexion = (HttpURLConnection) url.openConnection();
-        if (this.conexion.getResponseCode() == 200) {
+    public String getResource(URL url) throws IOException {
+        //realizamos la conexión para recibir el json
+        HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+        conexion.setRequestMethod("GET");
+        String salida;
+        // Comprobamos que el recurso accedido es correcto
+        if (conexion.getResponseCode() == 200) {
             InputStream responseBody = conexion.getInputStream();
             InputStreamReader responseBodyReader = new InputStreamReader(responseBody, "UTF-8");
-            this.jsonReader= new JsonReader(responseBodyReader);
+            JsonReader jsonReader= new JsonReader(responseBodyReader);
+            salida = jsonReader.toString();
+            jsonReader.close();
+            conexion.disconnect();
         } else {
-            // Error handling code goes here
+            salida= "Error al conecatar con recurso.";
         }
 
+        return salida;
+    }
+
+    public void postRecurso(URL url,) throws IOException {
+        //realizamos la conexión para recibir el json
+        HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+        conexion.setRequestMethod("POST");
+        String salida;
+        // Comprobamos que el recurso accedido es correcto
+        if (conexion.getResponseCode() == 200) {
+            InputStream responseBody = conexion.getInputStream();
+            InputStreamReader responseBodyReader = new InputStreamReader(responseBody, "UTF-8");
+            JsonReader jsonReader= new JsonReader(responseBodyReader);
+            salida = jsonReader.toString();
+            jsonReader.close();
+            conexion.disconnect();
+        } else {
+            salida= "Error al conecatar con recurso.";
+        }
     }
 }
