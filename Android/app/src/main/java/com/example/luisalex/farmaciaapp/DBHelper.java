@@ -25,20 +25,20 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Usuario obtenerUsuario(String nick, String pass){
+    public UsuarioInicio obtenerUsuario(String nick, String pass){
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query("USUARIOS",new String[]{"ID","NICK","PASS"}, "NICK=? AND PASS=?",new String[]{nick,pass},null,null,null,"1" );
         cursor.moveToFirst();
         if(cursor != null && cursor.getCount()>0){
-            return new Usuario(cursor.getString(1),cursor.getString(2));
+            return new UsuarioInicio(cursor.getString(1),cursor.getString(2));
         }
         else{
             return null;
         }
     }
 
-    public void addUsuario(Usuario u){
+    public void addUsuario(UsuarioInicio u){
         SQLiteDatabase db = this.getWritableDatabase();
 
         // Montamos o preparamos la fila que vamos a insertar

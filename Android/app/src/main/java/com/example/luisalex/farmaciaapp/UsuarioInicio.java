@@ -1,6 +1,6 @@
 package com.example.luisalex.farmaciaapp;
 
-public class Usuario {
+public class UsuarioInicio {
     private int id;
     private String nick;
     private String pass;
@@ -30,14 +30,14 @@ public class Usuario {
         this.pass = pass;
     }
 
-    public Usuario(String nick, String pass) {
+    public UsuarioInicio(String nick, String pass) {
         this.nick = nick;
         this.pass = pass;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" +
+        return "UsuarioInicio{" +
                 "id=" + id +
                 ", nick='" + nick + '\'' +
                 ", pass='" + pass + '\'' +

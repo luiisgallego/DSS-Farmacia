@@ -34,8 +34,8 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!emptyValidation()) {
-                    dbHelper.addUsuario(new Usuario(textNick.getText().toString(), textPass.getText().toString()));
-                    Toast.makeText(Main.this, "Usuario añadido", Toast.LENGTH_SHORT).show();
+                    dbHelper.addUsuario(new UsuarioInicio(textNick.getText().toString(), textPass.getText().toString()));
+                    Toast.makeText(Main.this, "UsuarioInicio añadido", Toast.LENGTH_SHORT).show();
                     textNick.setText("");
                     textPass.setText("");
                 }else{
@@ -47,16 +47,16 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!emptyValidation()) {
-                    Usuario user = dbHelper.obtenerUsuario(textNick.getText().toString(), textPass.getText().toString());
+                    UsuarioInicio user = dbHelper.obtenerUsuario(textNick.getText().toString(), textPass.getText().toString());
                     if (user != null) {
                         Bundle mBundle = new Bundle();
-                        mBundle.putString("Usuario", user.getNick());
+                        mBundle.putString("UsuarioInicio", user.getNick());
                         Intent intent = new Intent(Main.this, ActividadUsuario.class);
                         intent.putExtras(mBundle);
                         startActivity(intent);
                         Toast.makeText(Main.this, "Bienvenido " + user.getNick(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(Main.this, "Usuario inexistente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Main.this, "UsuarioInicio inexistente", Toast.LENGTH_SHORT).show();
                         textPass.setText("");
                     }
                 }else{
