@@ -1,12 +1,13 @@
 package com.example.luisalex.farmaciaapp.ComunicacionDB;
 
+import com.example.luisalex.farmaciaapp.modelo.Producto;
+
 import android.util.JsonReader;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -38,7 +39,8 @@ public class Rest {
         return salida;
     }
 
-    public void postRecurso(URL url,) throws IOException {
+    public void postRecurso(Producto producto) throws IOException {
+        URL url = new URL("http://localhost:8080/DSS-P4/rest/productos");
         //realizamos la conexión para recibir el json
         HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
         conexion.setRequestMethod("POST");
