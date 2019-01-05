@@ -1,4 +1,4 @@
-﻿package com.example.luisalex.farmaciaapp.servidor;
+﻿package servidor;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
