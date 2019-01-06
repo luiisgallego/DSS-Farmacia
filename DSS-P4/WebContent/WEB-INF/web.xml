@@ -20,8 +20,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 			<param-value>true</param-value>
 		</init-param>
         <load-on-startup>1</load-on-startup>
-    </servlet> 
-
+    </servlet>
     <servlet-mapping>
         <servlet-name>DSS-P4 Servlet</servlet-name>
         <url-pattern>/rest/*</url-pattern>

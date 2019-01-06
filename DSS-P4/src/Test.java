@@ -3,17 +3,13 @@ import java.util.ArrayList;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
-
+/*
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import com.sun.jersey.api.json.JSONConfiguration;
-
-import facade.FarmaciaFacade;
-import servidor.Db;
-import servidor.Farmacia;
+import com.sun.jersey.api.json.JSONConfiguration;*/
 
 public class Test {
 	
@@ -32,7 +28,7 @@ public class Test {
 		}*/
 		
 		// Prueba 3
-		ClientConfig clientConfig = new DefaultClientConfig();
+		/*ClientConfig clientConfig = new DefaultClientConfig();
 		clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 		Client client = Client.create(clientConfig);
 		WebResource servicio = client.resource(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build());
@@ -42,7 +38,7 @@ public class Test {
 		
 		Farmacia farmacia = new Farmacia(5000, "PruebaFarmacia", 17, 25);
 		ClientResponse respuesta = servicio.path("farmacias").accept("application/json").type("application/json").put(ClientResponse.class, farmacia);
-		System.out.println(respuesta.getEntity(String.class));	
+		System.out.println(respuesta.getEntity(String.class));	*/
 		
 	}
 }
