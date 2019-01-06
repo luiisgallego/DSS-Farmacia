@@ -1,20 +1,25 @@
 package rest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
 import facade.UsuarioFacade;
+import servidor.Usuario;
 
 @Path("/usuarios")
 public class Usuarios {
@@ -26,13 +31,21 @@ public class Usuarios {
 		usuarioFacade = new UsuarioFacade();
 	}
 	
-	@POST
-	@Consumes( MediaType.APPLICATION_JSON )
-	public Response updateUsuario(servidor.Usuario usuario) {
-		boolean updateOK = usuarioFacade.updateUsuario(usuario);
+	@POST	// CREAR
+	@Produces( MediaType.TEXT_HTML )
+	@Consumes( MediaType.APPLICATION_FORM_URLENCODED )
+	public void postUsuario(@FormParam("usuarioNick") String nick,
+			@FormParam("usuarioNombre") String nombre,
+			@FormParam("usuarioRol") String rol,
+			@FormParam("usuarioEmail") String email,
+			@FormParam("usuarioPass") String pass,
+			@Context HttpServletResponse servletResponse ) throws IOException{
 		
-		if(updateOK) return Response.status(200).entity("UpdateOK usuario").build();
-		else return Response.status(404).entity("Error POST usuario").build();
+				Usuario usuario = new Usuario(0,nick,nombre,rol,email,pass); 
+				boolean postOK = usuarioFacade.newUsuario(usuario);
+		
+				// Redirigir ??
+				servletResponse.sendRedirect("../rest/usuarios");
 	}
 	
 	@GET	
