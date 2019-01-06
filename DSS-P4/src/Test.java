@@ -1,8 +1,8 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
+import org.apache.catalina.WebResource;
+import org.glassfish.jersey.client.ClientConfig;
 /*
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
