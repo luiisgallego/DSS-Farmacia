@@ -13,6 +13,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -50,7 +52,7 @@ public class ServletPrueba extends HttpServlet {
 		Productos producto = new Productos();
 		
 		System.out.println("Dentro de Servlet");
-		servicio = client.target(URL).path("/productos");
+		servicio = client.target(URL).path("/farmacias");
 		String result = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);
 		
 		//JsonObject obj = new JsonObject();
@@ -62,6 +64,8 @@ public class ServletPrueba extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("prueba", result);
 		
+		String json = gson.toJson(result);
+	    System.out.println(json);
 		
 		
 		

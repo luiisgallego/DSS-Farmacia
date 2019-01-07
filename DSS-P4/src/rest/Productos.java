@@ -63,6 +63,6 @@ public class Productos {
 	public Response getProductos(){
 		ArrayList<servidor.Producto> productos = productoFacade.getProductos();
 		String productosJSON = gson.toJson(productos);
-		return Response.status(200).entity(productosJSON).build();
+		return Response.status(200).entity(productosJSON).build();		 
 	}
 }
