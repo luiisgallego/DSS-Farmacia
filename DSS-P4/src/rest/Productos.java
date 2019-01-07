@@ -60,9 +60,9 @@ public class Productos {
 	//@Path("/getFarmacias") // En get no debería ser necesario
 	@GET	
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getFarmacias(){
+	public Response getProductos(){
 		ArrayList<servidor.Producto> productos = productoFacade.getProductos();
-		String farmaciasJSON = gson.toJson(productos);
-		return Response.status(200).entity(farmaciasJSON).build();
+		String productosJSON = gson.toJson(productos);
+		return Response.status(200).entity(productosJSON).build();
 	}
 }

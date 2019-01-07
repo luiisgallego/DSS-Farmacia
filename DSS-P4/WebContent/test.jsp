@@ -27,8 +27,18 @@
 			<input name="farmaciaLongitud"><br/>
 			<input type="submit" value="Guardar" />
 		</form>
-		<form action="../DSS-P4/rest/farmacias/" >
-			<input name="prueba" value="5"><br/>
+		
+		<%
+		
+		String prueba = (String)session.getAttribute("prueba");
+					
+					
+		
+		%>
+		<p>Prueba: <strong><%= prueba %></strong></p>
+		
+		<form action="../DSS-P4/ServletPrueba" method="GET">
+			<!--  <input name="prueba" value="5"><br/> -->
    			<input type="submit" value="Ver listado de farmacias" />
 		</form>
 	</body>
