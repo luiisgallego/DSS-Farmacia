@@ -34,23 +34,22 @@ public class Farmacias {
 	}
 	
 	@POST	// CREAR
-	@Produces( MediaType.TEXT_HTML )
 	public Response postFarmacia(@FormParam("farmaciaNombre") String nombre,
 			@FormParam("farmaciaLatitud") float latitud,
 			@FormParam("farmaciaLongitud") float longitud,
 			@Context HttpServletResponse servletResponse) throws IOException{
 		
+		System.out.println("Here2");
+		
 		Farmacia farmacia = new Farmacia(0, nombre, latitud, longitud); 
-		boolean putOK = farmaciaFacade.newFarmacia(farmacia);		
+		boolean putOK = farmaciaFacade.newFarmacia(farmacia);	
 		
-		//servletResponse.sendRedirect("../rest/farmacias");
-		
-		System.out.println("Envio respuesta");
+		//servletResponse.sendRedirect("../rest/farmacias");		
 		return Response.status(200).build();
 	}
 	
 	@GET	
-	@Produces({ MediaType.APPLICATION_JSON })
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFarmacias(){
 		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
 		String farmaciasJSON = gson.toJson(farmacias);
@@ -58,14 +57,4 @@ public class Farmacias {
 		return Response.status(200).entity(farmaciasJSON).build();
 	}
 	
-
-	
-	/*@PUT	// INSERTAR
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response putFarmacia(servidor.Farmacia farmacia){
-		boolean putOK = farmaciaFacade.newFarmacia(farmacia);
-		
-		if(putOK) return Response.status(200).entity("PutOK farmcia").build();
-		else return Response.status(404).entity("Error PUT farmacia").build();
-	}*/
 }

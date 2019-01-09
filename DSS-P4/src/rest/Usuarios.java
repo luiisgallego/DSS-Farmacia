@@ -33,22 +33,15 @@ public class Usuarios {
 	
 	@POST	// CREAR
 	@Produces( MediaType.TEXT_HTML )
-	@Consumes( MediaType.APPLICATION_FORM_URLENCODED )
-	public void postUsuario(@FormParam("usuarioNick") String nick,
-			@FormParam("usuarioNombre") String nombre,
-			@FormParam("usuarioRol") String rol,
-			@FormParam("usuarioEmail") String email,
-			@FormParam("usuarioPass") String pass,
-			@Context HttpServletResponse servletResponse ) throws IOException{
+	public Response postUsuario(@Context HttpServletResponse servletResponse) throws IOException {
+		servletResponse.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
+		System.out.println("PROBANDOO");
 		
-				Usuario usuario = new Usuario(0,nick,nombre,rol,email,pass); 
-				boolean postOK = usuarioFacade.newUsuario(usuario);
+		return Response.status(201).entity("OK").build();
 		
-				// Redirigir ??
-				servletResponse.sendRedirect("../rest/usuarios");
 	}
 	
-	@GET	
+	/*@GET	
 	@Produces( MediaType.APPLICATION_JSON )
 	public String getUsuarios(){
 		ArrayList<servidor.Usuario> usuarios = usuarioFacade.getUsuarios();
@@ -57,22 +50,16 @@ public class Usuarios {
 		return usuariosJSON;
 	}
 	
-	/*@PUT	
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response putUsuario(servidor.Usuario usuario){
-		boolean putOK = usuarioFacade.newUsuario(usuario);
+	@POST	// CREAR
+	@Produces( MediaType.TEXT_HTML )
+	public Response login(@FormParam("username") String username,
+			@FormParam("password") String password,
+			@Context HttpServletResponse servletResponse) throws IOException{ 
 		
-		if(putOK) return Response.status(200).entity("PutOK usuario").build();
-		else return Response.status(404).entity("Error PUT usuario").build();
-	}
-	
-	@DELETE
-	@Consumes({ MediaType.APPLICATION_JSON})
-	public Response deleteUsuario(servidor.Usuario usuario) {
-		boolean deleteOK = usuarioFacade.deleteUsuario(usuario);
-		
-		if(deleteOK) return Response.status(200).entity("DeleteOK usuario").build();
-		else return Response.status(404).entity("Error DELETE usuario").build();
-	}*/	
+				System.out.println("DEntro");
+				Response respuesta = usuarioFacade.getUsuario(username, password);	
+				System.out.println("DEntro3");
+				return respuesta;
+	}*/
 	
 }

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.ws.rs.core.Response;
+
 import servidor.Db;
 import servidor.Usuario;
 
@@ -38,21 +40,20 @@ public class UsuarioFacade {
 	}
 	
 	public boolean newUsuario(Usuario u) {
-		// Tenemos el String donde va la entrada equivalente en SQL
 		String insertarUsuario = "INSERT INTO USER"
 				+ "(NOMBRE,NICK,ROL,EMAIL,PASS) VALUES"
-				+ "(?,?,?,?,?)"; // Dejamos en ? los valores que tendr�
-		System.out.println(insertarUsuario);
+				+ "(?,?,?,?,?)"; 
 
 		try {
 			pstmt = this.con.prepareStatement(insertarUsuario);
-			pstmt.setString(1, u.getNombre()); // Indicamos la '?' que queremos rellenar y su valor.
+			pstmt.setString(1, u.getNombre()); 
 			pstmt.setString(2, u.getNick());
 			pstmt.setString(3, u.getRol());
 			pstmt.setString(4, u.getEmail());
 			pstmt.setString(5, u.getPass());
-			// Despu�s de esto tenemos la entrada en SQL totalmente completa.
-			pstmt.execute(); // Por lo que la ejecutamos.
+			
+			System.out.println(pstmt);
+			pstmt.execute(); 
 			this.con.close();
 			return true;
 		}catch(SQLException e) {
@@ -118,4 +119,31 @@ public class UsuarioFacade {
 		}
 		return usuarios;
 	}
+	
+	public Response getUsuario(String username, String password){
+		String getUsers = "SELECT * FROM USER WHERE NOMBRE="+username+"PASS="+password;
+		ArrayList<Usuario> usuarios= new ArrayList<Usuario>();
+		Integer status;
+		System.out.println(getUsers);
+		
+		try {
+			stmt = this.con.createStatement();
+			this.rs = stmt.executeQuery(getUsers);
+			
+			while(rs.next()) {
+				usuarios.add(new Usuario(rs.getInt("ID"),rs.getString("NICK"),rs.getString("NOMBRE"),rs.getString("ROL"),rs.getString("EMAIL"),rs.getString("PASS")));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}		
+		
+		if(usuarios == null || usuarios.size() == 0) status = 404;
+		else status = 200;
+		
+		return Response.status(status).build();
+	}
+	
+	
+	
 }

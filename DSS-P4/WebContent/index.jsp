@@ -10,17 +10,28 @@
 		<script src="JS/jquery-1.11.0.min.js"></script>
 		<script src="JS/bootstrap.min.js"></script>
 		<!--  CSS -->
-		<link href="CSS/estiloLogin.css" rel="stylesheet" />
+		<link href="CSS/estilo.css" rel="stylesheet" />
 	</head>
 	</head>
-	<body>		
-		<div class="wrapper">
-		    <form class="form-signin">  	        
-		      	<h2 class="form-signin-heading">Login</h2>
-			    <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
-			    <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
-			    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
+	<body>	
+	
+		<div class="login-form">
+		    <form action="../DSS-P4/ServletPrueba" method="POST"">
+		        <h2 class="text-center">LOGIN</h2>       
+		        <div class="form-group">
+		            <input name="username" type="text" class="form-control" placeholder="username" required="required">
+		        </div>
+		        <div class="form-group">
+		            <input name="password" type="password" class="form-control" placeholder="password" required="required">
+		        </div>
+		        <div class="form-group">
+		            <button type="submit" class="btn btn-primary btn-block">Aceptar</button>
+		        </div> 
+		        <input name="opcionServlet" type="hidden" value="login" />       
 		    </form>
-  		</div>	
+		    <p class="text-center"><a href="../DSS-P4/registro.jsp">REGISTRATE</a></p>
+		</div>
+		
+  		
 	</body>
 </html>

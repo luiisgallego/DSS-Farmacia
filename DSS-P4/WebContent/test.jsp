@@ -36,16 +36,16 @@
 	
 	
 	<%
-	Gson gson = new Gson();
-	String prueba = (String)session.getAttribute("prueba");
-	String json = gson.toJson(prueba);
+	//Gson gson = new Gson();
+	//String prueba = (String)session.getAttribute("prueba");
+	//String json = gson.toJson(prueba);
 	// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());		
 	%>
 	<p>Prueba: <strong>${ahora.ID}</strong></p>
 	
-	<form action="../DSS-P4/ServletPrueba" method="GET">
-		<!--  <input name="prueba" value="5"><br/> -->
-  			<input type="submit" value="Ver listado de farmacias" />
+	<form action="../DSS-P4/UsuariosServlet" method="GET">		
+		<input type="hidden" name="opcionServlet" value="getPrueba"><br/>
+ 		<input type="submit" value="Ver listado de farmacias" />
 	</form>
 	
 </body>

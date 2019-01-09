@@ -13,6 +13,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
@@ -34,10 +35,11 @@ public class ServletPrueba extends HttpServlet {
 	private String URL = "http://localhost:8080/DSS-P4/rest";
 	private Gson gson = new Gson();
 	private String opcion;
-	MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 	
+	MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 		
+
 	Client client = ClientBuilder.newClient();
 	WebTarget servicio;
-	Response respuesta;
+	//Response respuesta;
 	HttpServletResponse responseRedirect;
        
 	
@@ -48,26 +50,34 @@ public class ServletPrueba extends HttpServlet {
     // Para las consultas (GET)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
-		//Productos producto = new Productos();
+		// Tomamos la opción enviada en el formulario
+		/*opcion = request.getParameter("opcionServlet");
+		System.out.println("Opcion: " + opcion);
+		map.clear();
 		
-		System.out.println("Dentro de Servlet");
-		servicio = client.target(URL).path("/farmacias");
-		String result = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+		switch(opcion) {
+		
+		case "getPrueba":
+			servicio = client.target(URL).path("/farmacias");
+			String result = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+			System.out.println(result);		
+		}*/
+
+		
+		
 		
 		//JsonObject obj = new JsonObject();
 	    //JsonArray productosObtenidos = obj.getAsJsonArray("result"); 
 
 		//System.out.println(productosObtenidos.toString());	
-		System.out.println(result);	
+		//System.out.println(result);	
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("prueba", result);
+		//HttpSession session = request.getSession();
+		//session.setAttribute("prueba", result);
 		
-		String json = gson.toJson(result);
-	    System.out.println(json);	
+		//String json = gson.toJson(result);
+	    //System.out.println(json);	
 
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");
 		
 	}
 	
@@ -76,6 +86,7 @@ public class ServletPrueba extends HttpServlet {
 		
 		// Tomamos la opción enviada en el formulario
 		opcion = request.getParameter("opcionServlet");
+		map.clear();
 		
 		// Recogemos los datos y realizacion la peticion que corresponda
 		switch(opcion){
@@ -83,15 +94,35 @@ public class ServletPrueba extends HttpServlet {
 		case "prueba":
 			map.add("farmaciaNombre", request.getParameter("farmaciaNombre"));
 			map.add("farmaciaLatitud", request.getParameter("farmaciaLatitud"));
-			map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));
+			map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));			
 			
 			servicio = client.target(URL).path("/farmacias");
-			respuesta = servicio.request().post(Entity.form(map));	
+			String respuesta = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);	
+
+			//respuesta = servicio.request().get();
+			System.out.println("Respuesta: " + servicio);
 			
-			response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
+			//response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
 			break;
+			
+		/*case "login":
+			System.out.println("Servlet");
+			map.add("username", request.getParameter("username"));
+			map.add("password", request.getParameter("password"));
+			System.out.println(map);
+			
+			servicio = client.target(URL).path("/usuarios");
+			System.out.println(servicio);
+			respuesta = servicio.request().post(Entity.form(map));
+			
+			if(respuesta.getStatus() == 200) response.sendRedirect("http://localhost:8080/DSS-P4/test.jsp");	
+			else response.sendRedirect("http://localhost:8080/DSS-P4/error.jsp");	
+			
+			break;*/
 		
-		}				
+		}	
+		
+		
 		
 		
 		
