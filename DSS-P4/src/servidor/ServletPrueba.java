@@ -39,7 +39,7 @@ public class ServletPrueba extends HttpServlet {
 
 	Client client = ClientBuilder.newClient();
 	WebTarget servicio;
-	//Response respuesta;
+	Response respuesta;
 	HttpServletResponse responseRedirect;
        
 	
@@ -97,28 +97,23 @@ public class ServletPrueba extends HttpServlet {
 			map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));			
 			
 			servicio = client.target(URL).path("/farmacias");
-			String respuesta = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);	
-
-			//respuesta = servicio.request().get();
-			System.out.println("Respuesta: " + servicio);
+			//String respuesta = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);	
+			Response respuesta = servicio.request().post(Entity.form(map));
 			
-			//response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
+			response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
 			break;
 			
-		/*case "login":
-			System.out.println("Servlet");
+		case "login":
 			map.add("username", request.getParameter("username"));
 			map.add("password", request.getParameter("password"));
-			System.out.println(map);
 			
-			servicio = client.target(URL).path("/usuarios");
-			System.out.println(servicio);
+			servicio = client.target(URL).path("/usuarios/login");
 			respuesta = servicio.request().post(Entity.form(map));
 			
 			if(respuesta.getStatus() == 200) response.sendRedirect("http://localhost:8080/DSS-P4/test.jsp");	
 			else response.sendRedirect("http://localhost:8080/DSS-P4/error.jsp");	
 			
-			break;*/
+			break;
 		
 		}	
 		

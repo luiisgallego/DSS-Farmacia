@@ -48,18 +48,14 @@ public class Usuarios {
 		// Tenemos que pasar los usuarios a JSON
 		String usuariosJSON = gson.toJson(usuarios);
 		return usuariosJSON;
-	}
-	
-	@POST	// CREAR
-	@Produces( MediaType.TEXT_HTML )
-	public Response login(@FormParam("username") String username,
-			@FormParam("password") String password,
-			@Context HttpServletResponse servletResponse) throws IOException{ 
-		
-				System.out.println("DEntro");
-				Response respuesta = usuarioFacade.getUsuario(username, password);	
-				System.out.println("DEntro3");
-				return respuesta;
 	}*/
+	
+	@POST	
+	@Path("login")
+	@Produces( MediaType.TEXT_HTML )
+	public Response login(@FormParam("username") String username, @FormParam("password") String password){ 		
+		Response respuesta = usuarioFacade.getUsuario(username, password);	
+		return respuesta;
+	}
 	
 }

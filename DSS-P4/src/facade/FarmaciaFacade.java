@@ -34,7 +34,6 @@ public class FarmaciaFacade {
 	}
 
 	public boolean newFarmacia(Farmacia f) {
-		System.out.println("Here3");
 		
 		String insertarFarmacia = "INSERT INTO FARMACIA"
 				+ "(NOMBRE,LATITUD,LONGITUD) VALUES"

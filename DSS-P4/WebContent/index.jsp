@@ -16,7 +16,7 @@
 	<body>	
 	
 		<div class="login-form">
-		    <form action="../DSS-P4/ServletPrueba" method="POST"">
+		    <form action="../DSS-P4/UsuariosServlet" method="POST"">
 		        <h2 class="text-center">LOGIN</h2>       
 		        <div class="form-group">
 		            <input name="username" type="text" class="form-control" placeholder="username" required="required">

@@ -21,7 +21,7 @@
 		</div>
 	</div>	
 
-	<form action="../DSS-P4/ServletPrueba" method="POST">
+	<form action="../DSS-P4/FarmaciasServlet" method="POST">
 		<label for="farmaciaNombre">Nombre</label><br/>
 		<input name="farmaciaNombre"><br/>
 		<label for="farmaciaLatitud">Latitud</label><br/>

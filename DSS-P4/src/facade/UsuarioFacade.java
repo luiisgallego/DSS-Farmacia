@@ -85,9 +85,9 @@ public class UsuarioFacade {
 		return false;
 	}
 	
-	public boolean deleteUsuario(Usuario u) {
-		
+	public boolean deleteUsuario(Usuario u) {		
 		String deleteUsuario = "DELETE FROM USER WHERE ID=?";
+		
 		try {
 			pstmt= this.con.prepareStatement(deleteUsuario);
 			pstmt.setInt(1, u.getID());
@@ -121,10 +121,10 @@ public class UsuarioFacade {
 	}
 	
 	public Response getUsuario(String username, String password){
-		String getUsers = "SELECT * FROM USER WHERE NOMBRE="+username+"PASS="+password;
-		ArrayList<Usuario> usuarios= new ArrayList<Usuario>();
+		
+		String getUsers = "SELECT * FROM USER WHERE NOMBRE='"+username+"' and PASS='"+password+"'";
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		Integer status;
-		System.out.println(getUsers);
 		
 		try {
 			stmt = this.con.createStatement();
@@ -142,8 +142,6 @@ public class UsuarioFacade {
 		else status = 200;
 		
 		return Response.status(status).build();
-	}
-	
-	
+	}	
 	
 }
