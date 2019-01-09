@@ -86,7 +86,7 @@ public class Test {
 		Client cliente = ClientBuilder.newClient(config);
 		WebTarget servicio = cliente.target(UriBuilder.fromUri("http://localhost:8080/DSS-P4").build());
 		
-		System.out.println("Artistas actuales: ");
+		System.out.println("Farmacias actuales: ");
 		System.out.println(servicio.path("rest").path("farmacias").request().accept(MediaType.APPLICATION_JSON).get(String.class));
 		
 	}
