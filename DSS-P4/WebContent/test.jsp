@@ -22,13 +22,14 @@
 		</div>
 	</div>	
 
-	<form action="../DSS-P4/rest/farmacias" method="POST">
+	<form action="../DSS-P4/ServletPrueba" method="POST">
 		<label for="farmaciaNombre">Nombre</label><br/>
 		<input name="farmaciaNombre"><br/>
 		<label for="farmaciaLatitud">Latitud</label><br/>
 		<input name="farmaciaLatitud"><br/>
 		<label for="farmaciaLongitud">Longitud</label><br/>
 		<input name="farmaciaLongitud"><br/>
+		<input name="opcionServlet" type="hidden" value="prueba" />
 		<input type="submit" value="Guardar" />
 	</form>
 	

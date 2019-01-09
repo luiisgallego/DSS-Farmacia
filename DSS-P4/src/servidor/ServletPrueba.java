@@ -26,28 +26,27 @@ import com.google.gson.JsonObject;
 
 import rest.Productos;
 
-/**
- * Servlet implementation class ServletFarmacia
- */
+
 @WebServlet("/ServletPrueba")
 public class ServletPrueba extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	private String URL = "http://localhost:8080/DSS-P4/rest";
 	private Gson gson = new Gson();
-	
+	private String opcion;
+	MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 	
 	Client client = ClientBuilder.newClient();
-	//Response respuesta;
 	WebTarget servicio;
+	Response respuesta;
+	HttpServletResponse responseRedirect;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	
     public ServletPrueba() {
         super();
     }
 
+    // Para las consultas (GET)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		
 		
 		//Productos producto = new Productos();
 		
@@ -68,25 +67,33 @@ public class ServletPrueba extends HttpServlet {
 	    System.out.println(json);	
 
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.sendRedirect("http://localhost:8080/DSS-P4/test.jsp");
-		
-		
+		response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");
 		
 	}
 	
+	// Para el resto de peticiones (POST)
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 
+		// Tomamos la opción enviada en el formulario
+		opcion = request.getParameter("opcionServlet");
 		
-		map.add("farmaciaNombre", request.getParameter("farmaciaNombre"));
-		map.add("farmaciaLatitud", request.getParameter("farmaciaLatitud"));
-		map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));		
+		// Recogemos los datos y realizacion la peticion que corresponda
+		switch(opcion){
 		
-		servicio = client.target(URL).path("/farmacias");
-		servicio.request().post(Entity.form(map));
+		case "prueba":
+			map.add("farmaciaNombre", request.getParameter("farmaciaNombre"));
+			map.add("farmaciaLatitud", request.getParameter("farmaciaLatitud"));
+			map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));
+			
+			servicio = client.target(URL).path("/farmacias");
+			respuesta = servicio.request().post(Entity.form(map));	
+			
+			response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
+			break;
+		
+		}				
+		
+		
 		
 	}
-
-	
-
 }

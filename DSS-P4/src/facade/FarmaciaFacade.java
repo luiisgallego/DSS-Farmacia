@@ -37,14 +37,13 @@ public class FarmaciaFacade {
 		String insertarFarmacia = "INSERT INTO FARMACIA"
 				+ "(NOMBRE,LATITUD,LONGITUD) VALUES"
 				+ "(?,?,?)";
-		System.out.println(insertarFarmacia);
 
 		try {
 			pstmt = this.con.prepareStatement(insertarFarmacia);
 			pstmt.setString(1, f.getNombre());
 			pstmt.setFloat(2, f.getLatitud());
 			pstmt.setFloat(3, f.getLongitud());
-			//System.out.println(pstmt);			
+			System.out.println(pstmt);			
 			
 			pstmt.execute();
 			this.con.close();

@@ -17,12 +17,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-// https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.2/ --> Para importar la libreria
 import com.google.gson.Gson;
-
 
 import facade.FarmaciaFacade;
 import servidor.Farmacia;
+
 
 @Path("/farmacias")
 public class Farmacias {
@@ -36,25 +35,20 @@ public class Farmacias {
 	
 	@POST	// CREAR
 	@Produces( MediaType.TEXT_HTML )
-	public void postFarmacia(@FormParam("farmaciaNombre") String nombre,
+	public Response postFarmacia(@FormParam("farmaciaNombre") String nombre,
 			@FormParam("farmaciaLatitud") float latitud,
 			@FormParam("farmaciaLongitud") float longitud,
-			@Context HttpServletResponse servletResponse ) throws IOException{
-		
-		System.out.println("ENTRA");
-		System.out.println("Nombre: " + nombre);
+			@Context HttpServletResponse servletResponse) throws IOException{
 		
 		Farmacia farmacia = new Farmacia(0, nombre, latitud, longitud); 
 		boolean putOK = farmaciaFacade.newFarmacia(farmacia);		
 		
-		// Redirigir 
-		servletResponse.sendRedirect("../rest/farmacias");
+		//servletResponse.sendRedirect("../rest/farmacias");
 		
-		//if(putOK) return Response.status(200).entity("PutOK farmacia").build();
-		//else return Response.status(404).entity("Error PUT farmacia").build();		
+		System.out.println("Envio respuesta");
+		return Response.status(200).build();
 	}
 	
-	//@Path("/getFarmacias") // En get no debería ser necesario
 	@GET	
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getFarmacias(){
