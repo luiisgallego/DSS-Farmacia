@@ -63,6 +63,9 @@ public class FarmaciasServlet extends HttpServlet {
 			
 			response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
 			break;
+			
+		
+			
 		}
 		
 	}

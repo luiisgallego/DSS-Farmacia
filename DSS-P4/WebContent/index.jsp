@@ -29,7 +29,7 @@
 		        </div> 
 		        <input name="opcionServlet" type="hidden" value="login" />       
 		    </form>
-		    <p class="text-center"><a href="../DSS-P4/registro.jsp">REGISTRATE</a></p>
+		    <p class="text-center"><a href="../DSS-P4/registrar.jsp">REGISTRATE</a></p>
 		</div>
 		
   		

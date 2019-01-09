@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 
 import facade.UsuarioFacade;
+import servidor.Farmacia;
 import servidor.Usuario;
 
 @Path("/usuarios")
@@ -33,11 +34,20 @@ public class Usuarios {
 	
 	@POST	// CREAR
 	@Produces( MediaType.TEXT_HTML )
-	public Response postUsuario(@Context HttpServletResponse servletResponse) throws IOException {
-		servletResponse.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
-		System.out.println("PROBANDOO");
+	@Path("registro")
+	public Response postUsuario(@FormParam("nombre") String nombre,
+			@FormParam("nick") String nick,
+			@FormParam("pass") String pass,
+			@FormParam("rol") String rol,
+			@FormParam("email") String email) {
 		
-		return Response.status(201).entity("OK").build();
+		System.out.println("Dentro");
+		
+		Usuario usuario = new Usuario(0, nick, nombre, rol,email, pass); 
+		boolean putOK = usuarioFacade.newUsuario(usuario);
+		
+		if(putOK) return Response.status(200).build();
+		else return Response.status(404).build();
 		
 	}
 	
@@ -51,8 +61,8 @@ public class Usuarios {
 	}*/
 	
 	@POST	
+	@Produces( MediaType.TEXT_HTML )	
 	@Path("login")
-	@Produces( MediaType.TEXT_HTML )
 	public Response login(@FormParam("username") String username, @FormParam("password") String password){ 		
 		Response respuesta = usuarioFacade.getUsuario(username, password);	
 		return respuesta;

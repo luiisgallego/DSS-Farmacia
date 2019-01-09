@@ -52,7 +52,7 @@ public class UsuarioFacade {
 			pstmt.setString(4, u.getEmail());
 			pstmt.setString(5, u.getPass());
 			
-			System.out.println(pstmt);
+			//System.out.println(pstmt);
 			pstmt.execute(); 
 			this.con.close();
 			return true;

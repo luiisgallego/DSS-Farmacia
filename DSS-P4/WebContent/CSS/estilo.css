@@ -13,9 +13,23 @@
 }
 .form-control, .btn {      
    	 min-height: 38px;
-     border-radius: 2px;
+     border-radius: 2px;       
 }
-.btn {        
-	font-size: 15px;
-    font-weight: bold;
+
+.registro-form{
+	width: 600px;
+  	margin: 50px auto;
+}
+.registro-form form {
+   	margin-bottom: 15px;
+   	background: #f7f7f7;
+   	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   	padding: 30px;
+}
+.registro-form h2 {
+     margin: 0 0 15px;
+}
+.registro-form .btn {      
+   	 min-height: 38px;
+     border-radius: 2px;       
 }
