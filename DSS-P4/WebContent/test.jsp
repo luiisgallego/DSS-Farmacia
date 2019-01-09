@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="servidor.Farmacia" %>
-<%@page import="java.util.ArrayList" %>
 <%@page import="java.util.List" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

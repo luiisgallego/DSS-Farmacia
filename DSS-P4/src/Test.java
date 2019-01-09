@@ -13,7 +13,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
-import org.apache.catalina.WebResource;
+//import org.apache.catalina.WebResource;
 import org.glassfish.jersey.client.ClientConfig;
 /*
 import com.sun.jersey.api.client.Client;
@@ -30,7 +30,7 @@ public class Test {
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, IOException{
 		
 		// Prueba 1
-		Db bd = new Db();
+		//Db bd = new Db();
 		
 		// Prueba 2
 		/*FarmaciaFacade farmaciaFacade = new FarmaciaFacade();
@@ -55,7 +55,7 @@ public class Test {
 		System.out.println(respuesta.getEntity(String.class));	*/
 		
 		
-		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 		
+		/*MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 		
 
 		Client client = ClientBuilder.newClient();
 		WebTarget servicio;
@@ -66,7 +66,7 @@ public class Test {
 		map.add("farmaciaLatitud", "93849");
 		map.add("farmaciaLongitud", "8437983");	
 		
-		System.out.println("MAP: " + map);
+		System.out.println("MAP: " + map);*/
 		
 		//servicio = client.target(UriBuilder.fromUri("http://localhost:8080/DSS-P4/rest").build()).path("farmacias");
 		//System.out.println(servicio);
@@ -77,9 +77,17 @@ public class Test {
 		
 		//responseRedirect.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");
 		
-		WebTarget target = ClientBuilder.newClient().target("http://localhost:8080/DSS-P4/rest/").path("farmacias");
-		respuesta = target.request().post(Entity.form(map));	
+		//WebTarget target = ClientBuilder.newClient().target("http://localhost:8080/DSS-P4/rest/").path("farmacias");
+		//respuesta = target.request().post(Entity.form(map));	
 		//System.out.println("Respuesta: " + target.request().accept(MediaType.APPLICATION_JSON).get(String.class));
+		
+		
+		ClientConfig config = new ClientConfig();
+		Client cliente = ClientBuilder.newClient(config);
+		WebTarget servicio = cliente.target(UriBuilder.fromUri("http://localhost:8080/DSS-P4").build());
+		
+		System.out.println("Artistas actuales: ");
+		System.out.println(servicio.path("rest").path("farmacias").request().accept(MediaType.APPLICATION_JSON).get(String.class));
 		
 	}
 }
