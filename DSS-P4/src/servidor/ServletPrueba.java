@@ -1,6 +1,8 @@
 package servidor;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
@@ -40,16 +45,11 @@ public class ServletPrueba extends HttpServlet {
     public ServletPrueba() {
         super();
     }
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
 		
-		
-		Productos producto = new Productos();
+		//Productos producto = new Productos();
 		
 		System.out.println("Dentro de Servlet");
 		servicio = client.target(URL).path("/farmacias");
@@ -65,13 +65,26 @@ public class ServletPrueba extends HttpServlet {
 		session.setAttribute("prueba", result);
 		
 		String json = gson.toJson(result);
-	    System.out.println(json);
-		
-		
-		
+	    System.out.println(json);	
 
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.sendRedirect("http://localhost:8080/DSS-P4/test.jsp");
+		
+		
+		
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 
+		
+		map.add("farmaciaNombre", request.getParameter("farmaciaNombre"));
+		map.add("farmaciaLatitud", request.getParameter("farmaciaLatitud"));
+		map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));		
+		
+		servicio = client.target(URL).path("/farmacias");
+		servicio.request().post(Entity.form(map));
+		
 	}
 
 	

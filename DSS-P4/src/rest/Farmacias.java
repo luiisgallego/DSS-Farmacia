@@ -12,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -35,21 +36,35 @@ public class Farmacias {
 	
 	@POST	// CREAR
 	@Produces( MediaType.TEXT_HTML )
-	@Consumes( MediaType.APPLICATION_FORM_URLENCODED )
 	public void postFarmacia(@FormParam("farmaciaNombre") String nombre,
 			@FormParam("farmaciaLatitud") float latitud,
 			@FormParam("farmaciaLongitud") float longitud,
 			@Context HttpServletResponse servletResponse ) throws IOException{
 		
-		Farmacia farmacia = new Farmacia(0, nombre, latitud, longitud); 
-		boolean putOK = farmaciaFacade.newFarmacia(farmacia);
+		System.out.println("ENTRA");
+		System.out.println("Nombre: " + nombre);
 		
-		// Redirigir ??
+		Farmacia farmacia = new Farmacia(0, nombre, latitud, longitud); 
+		boolean putOK = farmaciaFacade.newFarmacia(farmacia);		
+		
+		// Redirigir 
 		servletResponse.sendRedirect("../rest/farmacias");
 		
 		//if(putOK) return Response.status(200).entity("PutOK farmacia").build();
 		//else return Response.status(404).entity("Error PUT farmacia").build();		
 	}
+	
+	//@Path("/getFarmacias") // En get no debería ser necesario
+	@GET	
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Response getFarmacias(){
+		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
+		String farmaciasJSON = gson.toJson(farmacias);
+		
+		return Response.status(200).entity(farmaciasJSON).build();
+	}
+	
+
 	
 	/*@PUT	// INSERTAR
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -59,14 +74,4 @@ public class Farmacias {
 		if(putOK) return Response.status(200).entity("PutOK farmcia").build();
 		else return Response.status(404).entity("Error PUT farmacia").build();
 	}*/
-	
-	//@Path("/getFarmacias") // En get no debería ser necesario
-	@GET	
-	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getFarmacias(){
-		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
-		String farmaciasJSON = gson.toJson(farmacias);
-		return Response.status(200).entity(farmaciasJSON).build();
-		//return farmacias;
-	}
 }
