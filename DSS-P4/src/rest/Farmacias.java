@@ -6,11 +6,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -56,4 +58,14 @@ public class Farmacias {
 		return Response.status(200).entity("{\n\"productos\" :" + farmaciasJSON+ "\n}").build();
 		//return Response.status(200).entity(farmaciasJSON).build();
 	}	
+	
+	@DELETE
+	@Path("{ID}")
+	public Response deleteFarmacias(@PathParam("ID") int ID){
+		Farmacia farmacia = new Farmacia(ID, "null", 0, 0);		
+		boolean deleteOK = farmaciaFacade.deleteFarmacia(farmacia);
+		
+		if(deleteOK) return Response.status(200).build();
+		else return Response.status(404).build();
+	}
 }

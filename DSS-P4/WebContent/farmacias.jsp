@@ -97,24 +97,22 @@
 		
 		<%
 		
-		String inputJson = "{\n" +
-		          "    'page1':'true',\n" +
-		          "    'page2':'true',\n" +
-		          "    'page3':'false'\n" +
-		          "}";
-		
 		Gson gson = new Gson();
 		//String prueba = (String)session.getAttribute("prueba");
 		//String json = gson.toJson(prueba);
 		// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());			
 		//String prueba = (String)session.getAttribute("resGET"); // toString()
 		
-		String prueba = session.getAttribute("resGET").toString();
+		//String prueba = session.getAttribute("resGET").toString();
 		
 		// de JSON a JSONArray
-		JSONObject obj = new JSONObject(prueba);
-		JSONArray jsonArray = obj.getJSONArray("productos");
+		//JSONObject obj = new JSONObject(prueba);
+		//JSONArray jsonArray = obj.getJSONArray("productos");
+		
+		JSONArray jsonArray = new JSONArray();
 		//out.println(jsonArray);
+		
+		//out.println("REQUEST: "+ request.getAttribute("Probando"));
 	      
         //out.println(prueba);
 	   	//List<Farmacia> farmacias = new Gson().fromJson(prueba, new TypeToken<List<Farmacia>>() {}.getType());
@@ -192,15 +190,18 @@
 					  out.println("</tr>");
 					  
 					  for(int i=0; i<farmaciasTotal.size(); i++){
+						  String url;
 						  Farmacia farmacia = new Farmacia();
 						  farmacia = farmaciasTotal.get(i);
 						  
+						  url = "../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID();
 						  out.println("<tr>");
 						  out.println("<th>"+ farmacia.getID()  +"</th>");
 						  out.println("<td>"+ farmacia.getNombre()  +"</td>");
 						  out.println("<td>"+ farmacia.getLongitud()  +"</td>");
 						  out.println("<td>"+ farmacia.getLongitud()  +"</td>");
-						  out.println("<td><a href=\"../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID() +"\">BORRAR</a></td>");
+						  //out.println("<td><a href=\"../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID() +"\">BORRAR</a></td>");
+						  out.println("<td><a href=\"" + url +"\">BORRAR</a></td>");
 						  out.println("</tr>");						  
 					  }
 					 

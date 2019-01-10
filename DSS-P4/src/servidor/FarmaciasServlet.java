@@ -41,6 +41,7 @@ public class FarmaciasServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		opcion = request.getParameter("opcionServlet");
+		map.clear();
 		
 		switch(opcion){
 		
@@ -49,15 +50,18 @@ public class FarmaciasServlet extends HttpServlet {
 			String res = servicio.request().get(String.class);
 			
 			HttpSession session = request.getSession();
-			//session.setAttribute("resGET", gson.toJson(res));
 			session.setAttribute("resGET", res);
 			
 			System.out.println("JSON servlet Farmacias: " + res);
 			break;
 			
-		case "deleteFarmacias":
-			System.out.println(request.getParameter("ID"));
+		case "deleteFarmacias":			
+			String aux = "/farmacias/"+request.getParameter("ID");
+			servicio = client.target(URL).path(aux);	
+			Response respuesta = servicio.request().delete();
 			
+			response.sendRedirect("http://localhost:8080/DSS-P4/farmacias.jsp");
+			break;
 		}
 	}
 

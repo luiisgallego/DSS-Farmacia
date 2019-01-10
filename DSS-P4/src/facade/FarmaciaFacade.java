@@ -76,12 +76,12 @@ public class FarmaciaFacade {
 		return false;
 	}
 	
-	public boolean deleteFarmacia(Farmacia f) {
-		
+	public boolean deleteFarmacia(Farmacia f) {	
 		String deleteFarmacia = "DELETE FROM FARMACIA WHERE ID=?";
 		try {
 			pstmt= this.con.prepareStatement(deleteFarmacia);
 			pstmt.setInt(1, f.getID());
+			System.out.println(pstmt);	
 			pstmt.execute();
 			
 			this.con.close();
