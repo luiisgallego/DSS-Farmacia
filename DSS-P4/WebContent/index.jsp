@@ -11,6 +11,14 @@
 		<script src="JS/bootstrap.min.js"></script>
 		<!--  CSS -->
 		<link href="CSS/estilo.css" rel="stylesheet" />	
+		
+		<script type="text/javascript"> 
+		$(document).ready(function() {		 
+			$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
+		});
+		</script>
+		
+		<% //HttpSession session = request.getSession(); %>
 	</head>
 	</head>
 	<body>	

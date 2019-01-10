@@ -47,6 +47,7 @@ public class Orders {
 		ArrayList<servidor.Order> orders = orderFacade.getOrder();
 		String ordersJSON = gson.toJson(orders);
 		
-		return Response.status(200).entity(ordersJSON).build();
+		return Response.status(200).entity("{\n\"pedidos\" :" + ordersJSON+ "\n}").build();
+		//return Response.status(200).entity(ordersJSON).build();
 	}
 }

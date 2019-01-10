@@ -21,8 +21,7 @@
 		<!--  CSS -->
 		<link href="CSS/estilo.css" rel="stylesheet" />
 		
-		<script type="text/javascript">
- 
+		<script type="text/javascript"> 
 		$(document).ready(function() {		 
 			$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
 		});
@@ -97,74 +96,47 @@
 		
 		<%
 		
-		//String json = gson.toJson(prueba);
-		// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());			
-		//String prueba = (String)session.getAttribute("resGET"); // toString()
-		
 		Gson gson = new Gson();
-		HttpSession session2 = request.getSession();
-		//String prueba = (String)session.getAttribute("prueba");
-		//String prueba = session2.getAttribute("resGET").toString();		
-		//JSONObject obj = new JSONObject(prueba);
-		//JSONArray jsonArray = obj.getJSONArray("farmacias");		
-		JSONArray jsonArray = new JSONArray();
-		
-		
-		
-		
-		
-		//out.println("REQUEST: "+ request.getAttribute("Probando"));
-	      
-        //out.println(prueba);
-	   	//List<Farmacia> farmacias = new Gson().fromJson(prueba, new TypeToken<List<Farmacia>>() {}.getType());
-	  	//out.println(farmacias);    
-	            
-		//Type type = new TypeToken<Map<String, String>>() {}.getType();
-		//Map<String,String> map = new Gson().fromJson((String)session.getAttribute("resGET"), type);
-		//ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());	
-		
-		//out.println(map);
-		
-		//out.println("Numero: " + jsonArray.length());
-		
 		ArrayList<Farmacia> farmaciasTotal = new ArrayList<Farmacia>();
 		
-		for(int i=0; i<jsonArray.length(); i++){
-			JSONObject item = jsonArray.getJSONObject(i);
-			Farmacia farmacia = new Farmacia();
+		if(session.getAttribute("getFarmaciasSesion") != null) {
+			//HttpSession session = request.getSession();
+			String prueba = session.getAttribute("getFarmaciasSesion").toString();		
+			JSONObject obj = new JSONObject(prueba);
+			JSONArray jsonArray = obj.getJSONArray("farmacias");		
+			//JSONArray jsonArray = new JSONArray();		
 			
-			String prueba1 = item.get("ID").toString();
-			int num = Integer.parseInt(prueba1);
-			String nombre = item.get("nombre").toString();
-			String prueba2 = item.get("latitud").toString();
-			float num2 = Float.parseFloat(prueba2);
-			String prueba3 = item.get("longitud").toString();
-			float num3 = Float.parseFloat(prueba3);
+			//String aux = request.getAttribute("prueba99").toString();
+			//out.println("REQUEST: " + aux);			
 			
-			farmacia.setID(num);
-			farmacia.setNombre(nombre);
-			farmacia.setLatitud(num2);
-			farmacia.setLongitud(num3);
-			
-			//farmacia.setID(Integer.parseInt(item.getString("ID")));
-			//farmacia.setID(5);
-			//farmacia.setNombre(item.getString("nombre"));
-			//farmacia.setLatitud(Float.parseFloat(item.getString("latitud")));
-			//farmacia.setLatitud(Float.parseFloat(item.getString("longitud")));
-			
-			//out.println("\n\n\nFarmacia " + i + ":  " + farmacia.getID());
-			farmaciasTotal.add(farmacia);
+			for(int i=0; i<jsonArray.length(); i++){
+				JSONObject item = jsonArray.getJSONObject(i);
+				Farmacia farmacia = new Farmacia();
+				
+				String prueba1 = item.get("ID").toString();
+				int num = Integer.parseInt(prueba1);
+				//farmacia.setID(Integer.parseInt(item.getString("ID")));
+				String nombre = item.get("nombre").toString();
+				//farmacia.setNombre(item.getString("nombre"));
+				String prueba2 = item.get("latitud").toString();			
+				float num2 = Float.parseFloat(prueba2);
+				//farmacia.setLatitud(Float.parseFloat(item.getString("latitud")));
+				String prueba3 = item.get("longitud").toString();
+				float num3 = Float.parseFloat(prueba3);
+				//farmacia.setLatitud(Float.parseFloat(item.getString("longitud")));
+				
+				farmacia.setID(num);
+				farmacia.setNombre(nombre);
+				farmacia.setLatitud(num2);
+				farmacia.setLongitud(num3);			
+				
+				//out.println("\n\n\nFarmacia " + i + ":  " + farmacia.getID());
+				farmaciasTotal.add(farmacia);
+			}
+		} else {			
+			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");
 		}
-		
-		out.println(farmaciasTotal.size());
-		
-		
-		
 		%>
-		<!--  <p>Prueba: <strong>${sessionScope.resGET}</strong></p>
-		<p>PRueba2: <strong><% //out.println(prueba); %></strong> -->
-		
-		
 		
 		<div class="container">
 			<div class="row">
@@ -188,26 +160,27 @@
 					  out.println("<td>Otto</td>");
 					  out.println("<td>@mdo</td>");
 					  out.println("<td>NadaAqui</td>");
+					  out.println("<td>NadaAqui2</td>");
 					  out.println("</tr>");
 					  
 					  for(int i=0; i<farmaciasTotal.size(); i++){
-						  String url;
 						  Farmacia farmacia = new Farmacia();
 						  farmacia = farmaciasTotal.get(i);
 						  
-						  url = "../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID();
+						  String urlBorrar = "../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID();
+						  String urlEditar = "../DSS-P4/editarFarmacias.jsp?ID="
+						  + farmacia.getID() + "&nombre=" + farmacia.getNombre() + "&latitud=" + farmacia.getLatitud() + "&longitud=" + farmacia.getLongitud();
 						  out.println("<tr>");
 						  out.println("<th>"+ farmacia.getID()  +"</th>");
 						  out.println("<td>"+ farmacia.getNombre()  +"</td>");
-						  out.println("<td>"+ farmacia.getLongitud()  +"</td>");
+						  out.println("<td>"+ farmacia.getLatitud()  +"</td>");
 						  out.println("<td>"+ farmacia.getLongitud()  +"</td>");
 						  //out.println("<td><a href=\"../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID() +"\">BORRAR</a></td>");
-						  out.println("<td><a href=\"" + url +"\">BORRAR</a></td>");
+						  out.println("<td><a href=\"" + urlBorrar +"\">BORRAR</a></td>");
+						  out.println("<td><a href=\"" + urlEditar +"\">EDITAR</a></td>");
 						  out.println("</tr>");						  
 					  }
-					 
-					  
-					 // out.println("<div class=\"col-xs-6 col-sm-2\">"+p.getId()+ "</div>");
+						// out.println("<div class=\"col-xs-6 col-sm-2\">"+p.getId()+ "</div>");					 
 					  %>
 					  </tbody>
 					</table>

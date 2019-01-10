@@ -1,6 +1,8 @@
 package servidor;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,9 +52,13 @@ public class FarmaciasServlet extends HttpServlet {
 			String res = servicio.request().get(String.class);
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("resGET", res);
+			session.setAttribute("getFarmaciasSesion", res);
 			
-			System.out.println("JSON servlet Farmacias: " + res);
+			/*request.setAttribute("prueba99", "textPrueba");
+			RequestDispatcher dispacher = request.getRequestDispatcher("farmacias.jsp");
+			dispacher.forward(request, response);*/
+			
+			//System.out.println("JSON servlet Farmacias: " + res);
 			break;
 			
 		case "deleteFarmacias":			
@@ -60,9 +66,11 @@ public class FarmaciasServlet extends HttpServlet {
 			servicio = client.target(URL).path(aux);	
 			Response respuesta = servicio.request().delete();
 			
-			response.sendRedirect("http://localhost:8080/DSS-P4/farmacias.jsp");
+			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");
 			break;
 		}
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,8 +91,20 @@ public class FarmaciasServlet extends HttpServlet {
 			//String respuesta = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);	
 			Response respuesta = servicio.request().post(Entity.form(map));
 			
-			response.sendRedirect("http://localhost:8080/DSS-P4/farmacias.jsp");		
+			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");	
 			break;	
+			
+		case "editarFarmacias":						
+			map.add("ID", request.getParameter("ID"));
+			map.add("nombre", request.getParameter("farmaciaNombre"));
+			map.add("latitud", request.getParameter("farmaciaLatitud"));
+			map.add("longitud", request.getParameter("farmaciaLongitud"));
+			
+			servicio = client.target(URL).path("farmacias");
+			Response respuesta2 = servicio.request().put(Entity.form(map));
+			
+			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");			
+			break;
 			
 		}
 		

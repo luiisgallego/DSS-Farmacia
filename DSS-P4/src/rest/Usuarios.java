@@ -68,11 +68,12 @@ public class Usuarios {
 	
 	@GET	
 	@Produces( MediaType.APPLICATION_JSON )
-	public String getUsuarios(){
+	public Response getUsuarios(){
 		ArrayList<servidor.Usuario> usuarios = usuarioFacade.getUsuarios();
 		String usuariosJSON = gson.toJson(usuarios);
 		
-		return usuariosJSON;
+		return Response.status(200).entity("{\n\"usuarios\" :" + usuariosJSON+ "\n}").build();
+		//return usuariosJSON;
 	}
 	
 }
