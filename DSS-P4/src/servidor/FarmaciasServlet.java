@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -24,6 +25,7 @@ public class FarmaciasServlet extends HttpServlet {
 	
 	private String URL = "http://localhost:8080/DSS-P4/rest";
 	private String opcion;
+	Gson gson = new Gson();
 	MultivaluedMap<String, String> map = new MultivaluedHashMap<String, String>(); 		
 
 	Client client = ClientBuilder.newClient();
@@ -37,12 +39,23 @@ public class FarmaciasServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		opcion = request.getParameter("opcionServlet");
+		
+		switch(opcion){
+		
+		case "getFarmacias":
+			servicio = client.target(URL).path("/farmacias");
+			String res = servicio.request().get(String.class);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("resGET", gson.toJson(res));
+			
+			System.out.println("JSON servlet Farmacias: " + res);
+			break;
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Tomamos la opción enviada en el formulario
@@ -62,9 +75,7 @@ public class FarmaciasServlet extends HttpServlet {
 			Response respuesta = servicio.request().post(Entity.form(map));
 			
 			response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
-			break;
-			
-		
+			break;	
 			
 		}
 		

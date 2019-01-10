@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="com.google.gson.reflect.TypeToken" %>
+<%@ page import="servidor.Farmacia" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.lang.reflect.Type" %>
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -11,6 +19,14 @@
 		<script src="JS/bootstrap.min.js"></script>
 		<!--  CSS -->
 		<link href="CSS/estilo.css" rel="stylesheet" />
+		
+		<script type="text/javascript">
+ 
+		$(document).ready(function() {		 
+			$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
+		});
+		</script>
+		
 	</head>
 	</head>
 	<body>		
@@ -48,7 +64,77 @@
 			</div>
 		</div>
 		
-		<h1>FARMACIAS</h1>
+		<%
+		
+		//Gson gson = new Gson();
+		//String prueba = (String)session.getAttribute("prueba");
+		//String json = gson.toJson(prueba);
+		// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());	
+		
+		String prueba = (String)session.getAttribute("resGET");
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(prueba);
+		
+		
+		String inputJson = "{\n" +
+          "    'page1':'true',\n" +
+          "    'page2':'true',\n" +
+          "    'page3':'false'\n" +
+          "}";
+	     
+        //out.println(inputJson);
+        //out.println(prueba);
+	            
+	   //List<Farmacia> farmacias = new Gson().fromJson(prueba, new TypeToken<List<Farmacia>>() {}.getType());
+	   //out.println(farmacias);
+	            
+	            
+	            
+		//Type type = new TypeToken<Map<String, String>>() {}.getType();
+		//Map<String,String> map = new Gson().fromJson((String)session.getAttribute("resGET"), type);
+		//ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());	
+		
+		//out.println(map);
+		
+		%>
+		<!--  <p>Prueba: <strong>${sessionScope.resGET}</strong></p>
+		<p>PRueba2: <strong><% //out.println(prueba); %></strong> -->
+		
+		
+		
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">First</th>
+		      <th scope="col">Last</th>
+		      <th scope="col">Handle</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <th scope="row">1</th>
+		      <td>Mark</td>
+		      <td>Otto</td>
+		      <td>@mdo</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">2</th>
+		      <td>Jacob</td>
+		      <td>Thornton</td>
+		      <td>@fat</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">3</th>
+		      <td>Larry</td>
+		      <td>the Bird</td>
+		      <td>@twitter</td>
+		    </tr>
+		  </tbody>
+		</table>
+		
+		
 		
   		
 	</body>

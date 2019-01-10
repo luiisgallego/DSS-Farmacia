@@ -10,7 +10,7 @@
 		<script src="JS/jquery-1.11.0.min.js"></script>
 		<script src="JS/bootstrap.min.js"></script>
 		<!--  CSS -->
-		<link href="CSS/estilo.css" rel="stylesheet" />
+		<link href="CSS/estilo.css" rel="stylesheet" />	
 	</head>
 	</head>
 	<body>	
