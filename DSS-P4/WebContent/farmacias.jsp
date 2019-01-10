@@ -97,20 +97,23 @@
 		
 		<%
 		
-		Gson gson = new Gson();
-		//String prueba = (String)session.getAttribute("prueba");
 		//String json = gson.toJson(prueba);
 		// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());			
 		//String prueba = (String)session.getAttribute("resGET"); // toString()
 		
+		Gson gson = new Gson();
+		//HttpSession session2 = request.getSession();
+		//String prueba = (String)session.getAttribute("prueba");
 		//String prueba = session.getAttribute("resGET").toString();
 		
 		// de JSON a JSONArray
 		//JSONObject obj = new JSONObject(prueba);
-		//JSONArray jsonArray = obj.getJSONArray("productos");
-		
+		//JSONArray jsonArray = obj.getJSONArray("productos");		
 		JSONArray jsonArray = new JSONArray();
-		//out.println(jsonArray);
+		
+		
+		
+		
 		
 		//out.println("REQUEST: "+ request.getAttribute("Probando"));
 	      
