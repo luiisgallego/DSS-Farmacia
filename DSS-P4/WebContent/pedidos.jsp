@@ -28,10 +28,10 @@
 		      <li class="nav-item">
 		        <a class="nav-link" href="../DSS-P4/farmacias.jsp">Farmacias</a>
 		      </li>
-		      <li class="nav-item active">
+		      <li class="nav-item">
 		        <a class="nav-link" href="../DSS-P4/productos.jsp">Productos</a>
 		      </li>
-		      <li class="nav-item">
+		      <li class="nav-item active">
 		        <a class="nav-link" href="../DSS-P4/pedidos.jsp">Pedidos</a>
 		      </li>
 		    </ul>
@@ -48,7 +48,8 @@
 			</div>
 		</div>
 		
-		<h1>PRODUCTOS</h1>
+		<h1>PEDIDOS</h1>
+		
   		
 	</body>
 </html>

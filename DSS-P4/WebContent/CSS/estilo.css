@@ -33,3 +33,35 @@
    	 min-height: 38px;
      border-radius: 2px;       
 }
+
+.estiloHeader {
+	height: 250px;
+	background-color: #E6E6E6;
+}
+
+.estiloHeaderH1 {
+	padding-top: 100px;
+}
+
+.estiloHeaderH1 h1 {
+	font-size: 50px;
+}
+
+.botonSalir {
+	text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+}
+
+.navegacionEstilo {
+	padding-left:50px;
+}
+
+.navegacionEstilo ul li {
+	padding-left:20px;
+}

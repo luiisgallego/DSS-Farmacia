@@ -20,15 +20,15 @@
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>		
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		  <div class="collapse navbar-collapse navegacionEstilo" id="navbarSupportedContent">
 		    <ul class="navbar-nav mr-auto">
 		      <li class="nav-item">
 		        <a class="nav-link" href="../DSS-P4/principal.jsp">Inicio</a>
 		      </li>
-		      <li class="nav-item">
+		      <li class="nav-item active">
 		        <a class="nav-link" href="../DSS-P4/farmacias.jsp">Farmacias</a>
 		      </li>
-		      <li class="nav-item active">
+		      <li class="nav-item">
 		        <a class="nav-link" href="../DSS-P4/productos.jsp">Productos</a>
 		      </li>
 		      <li class="nav-item">
@@ -48,7 +48,8 @@
 			</div>
 		</div>
 		
-		<h1>PRODUCTOS</h1>
+		<h1>FARMACIAS</h1>
+		
   		
 	</body>
 </html>
