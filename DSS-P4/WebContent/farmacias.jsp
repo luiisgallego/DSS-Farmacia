@@ -7,6 +7,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.lang.reflect.Type" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="org.json.JSONArray,org.json.JSONObject,org.json.JSONException" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -62,49 +63,7 @@
 					<h1 style="text-align: center;">Consorcio Farmacias</h1>
 				</div>
 			</div>
-		</div>
-		
-		<%
-		
-		//Gson gson = new Gson();
-		//String prueba = (String)session.getAttribute("prueba");
-		//String json = gson.toJson(prueba);
-		// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());	
-		
-		String prueba = (String)session.getAttribute("resGET"); // toString()
-		
-		// de JSON a JSONArray
-		
-		Gson gson = new Gson();
-		String json = gson.toJson(prueba);
-		
-		
-		String inputJson = "{\n" +
-          "    'page1':'true',\n" +
-          "    'page2':'true',\n" +
-          "    'page3':'false'\n" +
-          "}";
-	     
-        //out.println(inputJson);
-        //out.println(prueba);
-	      
-        out.println(prueba);
-	   List<Farmacia> farmacias = new Gson().fromJson(prueba, new TypeToken<List<Farmacia>>() {}.getType());
-	   //out.println(farmacias);
-	            
-	            
-	            
-		//Type type = new TypeToken<Map<String, String>>() {}.getType();
-		//Map<String,String> map = new Gson().fromJson((String)session.getAttribute("resGET"), type);
-		//ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());	
-		
-		//out.println(map);
-		
-		%>
-		<!--  <p>Prueba: <strong>${sessionScope.resGET}</strong></p>
-		<p>PRueba2: <strong><% //out.println(prueba); %></strong> -->
-		
-		
+		</div>		
 		
 		<div class="container" style="margin-top:30px;">
 			<div class="row">
@@ -136,42 +95,123 @@
 			</div>
 		</div>
 		
+		<%
+		
+		String inputJson = "{\n" +
+		          "    'page1':'true',\n" +
+		          "    'page2':'true',\n" +
+		          "    'page3':'false'\n" +
+		          "}";
+		
+		Gson gson = new Gson();
+		//String prueba = (String)session.getAttribute("prueba");
+		//String json = gson.toJson(prueba);
+		// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());			
+		//String prueba = (String)session.getAttribute("resGET"); // toString()
+		
+		String prueba = session.getAttribute("resGET").toString();
+		
+		// de JSON a JSONArray
+		JSONObject obj = new JSONObject(prueba);
+		JSONArray jsonArray = obj.getJSONArray("productos");
+		//out.println(jsonArray);
+	      
+        //out.println(prueba);
+	   	//List<Farmacia> farmacias = new Gson().fromJson(prueba, new TypeToken<List<Farmacia>>() {}.getType());
+	  	//out.println(farmacias);    
+	            
+		//Type type = new TypeToken<Map<String, String>>() {}.getType();
+		//Map<String,String> map = new Gson().fromJson((String)session.getAttribute("resGET"), type);
+		//ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());	
+		
+		//out.println(map);
+		
+		//out.println("Numero: " + jsonArray.length());
+		
+		ArrayList<Farmacia> farmaciasTotal = new ArrayList<Farmacia>();
+		
+		for(int i=0; i<jsonArray.length(); i++){
+			JSONObject item = jsonArray.getJSONObject(i);
+			Farmacia farmacia = new Farmacia();
+			
+			String prueba1 = item.get("ID").toString();
+			int num = Integer.parseInt(prueba1);
+			String nombre = item.get("nombre").toString();
+			String prueba2 = item.get("latitud").toString();
+			float num2 = Float.parseFloat(prueba2);
+			String prueba3 = item.get("longitud").toString();
+			float num3 = Float.parseFloat(prueba3);
+			
+			farmacia.setID(num);
+			farmacia.setNombre(nombre);
+			farmacia.setLatitud(num2);
+			farmacia.setLongitud(num3);
+			
+			//farmacia.setID(Integer.parseInt(item.getString("ID")));
+			//farmacia.setID(5);
+			//farmacia.setNombre(item.getString("nombre"));
+			//farmacia.setLatitud(Float.parseFloat(item.getString("latitud")));
+			//farmacia.setLatitud(Float.parseFloat(item.getString("longitud")));
+			
+			//out.println("\n\n\nFarmacia " + i + ":  " + farmacia.getID());
+			farmaciasTotal.add(farmacia);
+		}
+		
+		out.println(farmaciasTotal.size());
 		
 		
 		
+		%>
+		<!--  <p>Prueba: <strong>${sessionScope.resGET}</strong></p>
+		<p>PRueba2: <strong><% //out.println(prueba); %></strong> -->
 		
 		
 		
-		<!--<table class="table table-striped">
-		  <thead>
-		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">First</th>
-		      <th scope="col">Last</th>
-		      <th scope="col">Handle</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <th scope="row">1</th>
-		      <td>Mark</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">2</th>
-		      <td>Jacob</td>
-		      <td>Thornton</td>
-		      <td>@fat</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">3</th>
-		      <td>Larry</td>
-		      <td>the Bird</td>
-		      <td>@twitter</td>
-		    </tr>
-		  </tbody>
-		</table>  -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<table class="table table-striped">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">First</th>
+					      <th scope="col">Last</th>
+					      <th scope="col">Handle</th>
+					      <th scope="col">Borrar</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  <%
+					  
+					  out.println("<tr>");
+					  out.println("<th>454</th>");
+					  out.println("<td>Mark</td>");
+					  out.println("<td>Otto</td>");
+					  out.println("<td>@mdo</td>");
+					  out.println("<td>NadaAqui</td>");
+					  out.println("</tr>");
+					  
+					  for(int i=0; i<farmaciasTotal.size(); i++){
+						  Farmacia farmacia = new Farmacia();
+						  farmacia = farmaciasTotal.get(i);
+						  
+						  out.println("<tr>");
+						  out.println("<th>"+ farmacia.getID()  +"</th>");
+						  out.println("<td>"+ farmacia.getNombre()  +"</td>");
+						  out.println("<td>"+ farmacia.getLongitud()  +"</td>");
+						  out.println("<td>"+ farmacia.getLongitud()  +"</td>");
+						  out.println("<td><a href=\"../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID() +"\">BORRAR</a></td>");
+						  out.println("</tr>");						  
+					  }
+					 
+					  
+					 // out.println("<div class=\"col-xs-6 col-sm-2\">"+p.getId()+ "</div>");
+					  %>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 		
 		
 		

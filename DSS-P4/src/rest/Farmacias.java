@@ -53,6 +53,7 @@ public class Farmacias {
 		ArrayList<servidor.Farmacia> farmacias = farmaciaFacade.getFarmacias();
 		String farmaciasJSON = gson.toJson(farmacias);
 		
-		return Response.status(200).entity(farmaciasJSON).build();
+		return Response.status(200).entity("{\n\"productos\" :" + farmaciasJSON+ "\n}").build();
+		//return Response.status(200).entity(farmaciasJSON).build();
 	}	
 }

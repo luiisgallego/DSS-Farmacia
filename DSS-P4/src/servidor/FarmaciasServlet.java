@@ -49,10 +49,15 @@ public class FarmaciasServlet extends HttpServlet {
 			String res = servicio.request().get(String.class);
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("resGET", gson.toJson(res));
+			//session.setAttribute("resGET", gson.toJson(res));
+			session.setAttribute("resGET", res);
 			
 			System.out.println("JSON servlet Farmacias: " + res);
 			break;
+			
+		case "deleteFarmacias":
+			System.out.println(request.getParameter("ID"));
+			
 		}
 	}
 
