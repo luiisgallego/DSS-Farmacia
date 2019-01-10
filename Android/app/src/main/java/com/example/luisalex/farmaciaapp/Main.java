@@ -51,7 +51,7 @@ public class Main extends AppCompatActivity {
                     if (user != null) {
                         Bundle mBundle = new Bundle();
                         mBundle.putString("UsuarioInicio", user.getNick());
-                        Intent intent = new Intent(Main.this, ActividadUsuario.class);
+                        Intent intent = new Intent(Main.this, ActividadFarmacias.class);
                         intent.putExtras(mBundle);
                         startActivity(intent);
                         Toast.makeText(Main.this, "Bienvenido " + user.getNick(), Toast.LENGTH_SHORT).show();
