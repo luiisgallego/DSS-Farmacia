@@ -38,7 +38,7 @@ public class REST{
             conexion.setRequestProperty("User-Agent", USER_AGENT);
             conexion.connect();
             int response = conexion.getResponseCode();
-            Log.i(RESTLOG,"Código de respuesta: " + response);
+            Log.e(RESTLOG,"Código de respuesta: " + response);
             if(response == 200) {
                 InputStream in = new BufferedInputStream(conexion.getInputStream());
                 if(in != null)
