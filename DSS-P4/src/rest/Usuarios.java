@@ -33,6 +33,14 @@ public class Usuarios {
 	}
 	
 	@POST	// CREAR
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("/ALEX")
+	public Response postUsuario2() {		
+		System.out.println("Vamos ALEX");		
+		return Response.status(200).build();			 
+	}
+	
+	@POST	// CREAR
 	@Produces( MediaType.TEXT_HTML )
 	@Path("registro")
 	public Response postUsuario(@FormParam("nombre") String nombre,
@@ -47,8 +55,7 @@ public class Usuarios {
 		boolean postOK = usuarioFacade.newUsuario(usuario);
 		
 		if(postOK) return Response.status(200).build();
-		else return Response.status(404).build();
-		
+		else return Response.status(404).build();		
 	}
 	
 	@POST	

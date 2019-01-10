@@ -102,13 +102,11 @@
 		//String prueba = (String)session.getAttribute("resGET"); // toString()
 		
 		Gson gson = new Gson();
-		//HttpSession session2 = request.getSession();
+		HttpSession session2 = request.getSession();
 		//String prueba = (String)session.getAttribute("prueba");
-		//String prueba = session.getAttribute("resGET").toString();
-		
-		// de JSON a JSONArray
+		//String prueba = session2.getAttribute("resGET").toString();		
 		//JSONObject obj = new JSONObject(prueba);
-		//JSONArray jsonArray = obj.getJSONArray("productos");		
+		//JSONArray jsonArray = obj.getJSONArray("farmacias");		
 		JSONArray jsonArray = new JSONArray();
 		
 		
