@@ -16,7 +16,7 @@
 	<body>	
 	
 		<div class="registro-form">
-		    <form action="../DSS-P4/UsuariosServlet" method="POST"">
+		    <form action="../DSS-P4/UsuariosServlet" method="POST">
 		        <h2 class="text-center">REGISTRAR</h2> 
 		        <div class="container">
 		        	<div class="row">
@@ -38,8 +38,7 @@
 		        			<input name="email" type="text" class="form-control" placeholder="email" required="required">
 		        		</div>
 		        	</div>
-		        </div>	        
-		        
+		        </div>	   
 		        <div class="form-group">
 		            <button type="submit" class="btn btn-primary btn-block">Aceptar</button>
 		        </div> 

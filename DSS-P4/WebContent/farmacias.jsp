@@ -103,7 +103,43 @@
 		
 		
 		
-		<table class="table table-striped">
+		<div class="container" style="margin-top:30px;">
+			<div class="row">
+				<h3 class="col-md-12">Añade una nueva farmacia:</h3>
+				<form action="../DSS-P4/FarmaciasServlet" method="POST">
+					<div class="form-group row">
+					  <label class="col-2 col-form-label">Nombre</label>
+					  <div class="col-md-8" style="margin-left:50px;">
+					    <input class="form-control" type="text" name="farmaciaNombre">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <label class="col-2 col-form-label">Latitud</label>
+					  <div class="col-8" style="margin-left:50px;">
+					    <input class="form-control" type="text" name="farmaciaLatitud">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <label class="col-2 col-form-label">Longitud</label>
+					  <div class="col-8" style="margin-left:50px;">
+					    <input class="form-control" type="text" name="farmaciaLongitud">
+					  </div>
+					</div>	
+					<input name="opcionServlet" type="hidden" value="addFarmacia" />  						   
+			        <div class="form-group">
+			            <button type="submit" class="btn btn-primary btn-block">Añadir</button>
+			        </div>						
+				</form>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		<!--<table class="table table-striped">
 		  <thead>
 		    <tr>
 		      <th scope="col">#</th>
@@ -132,7 +168,7 @@
 		      <td>@twitter</td>
 		    </tr>
 		  </tbody>
-		</table>
+		</table>  -->
 		
 		
 		

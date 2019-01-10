@@ -44,11 +44,19 @@ public class Usuarios {
 		System.out.println("Dentro");
 		
 		Usuario usuario = new Usuario(0, nick, nombre, rol,email, pass); 
-		boolean putOK = usuarioFacade.newUsuario(usuario);
+		boolean postOK = usuarioFacade.newUsuario(usuario);
 		
-		if(putOK) return Response.status(200).build();
+		if(postOK) return Response.status(200).build();
 		else return Response.status(404).build();
 		
+	}
+	
+	@POST	
+	@Produces( MediaType.TEXT_HTML )	
+	@Path("login")
+	public Response login(@FormParam("username") String username, @FormParam("password") String password){ 		
+		Response respuesta = usuarioFacade.getUsuario(username, password);	
+		return respuesta;
 	}
 	
 	/*@GET	
@@ -59,13 +67,5 @@ public class Usuarios {
 		String usuariosJSON = gson.toJson(usuarios);
 		return usuariosJSON;
 	}*/
-	
-	@POST	
-	@Produces( MediaType.TEXT_HTML )	
-	@Path("login")
-	public Response login(@FormParam("username") String username, @FormParam("password") String password){ 		
-		Response respuesta = usuarioFacade.getUsuario(username, password);	
-		return respuesta;
-	}
 	
 }

@@ -30,39 +30,31 @@ public class Productos {
 		productoFacade = new ProductoFacade(); 
 	}
 	
-	@POST	// CREAR
+	/*@POST	// CREAR
 	@Produces( MediaType.TEXT_HTML )
-	@Consumes( MediaType.APPLICATION_FORM_URLENCODED )
-	public void postProducto(@FormParam("productoNombre") String nombre,
+	@Consumes( MediaType.APPLICATION_FORM_URLENCODED )*/
+	
+	@POST	// CREAR
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response postProducto(@FormParam("productoNombre") String nombre,
 			@FormParam("productoCantidad") int cantidad,
 			@FormParam("productoPrecio") int precio,
+			@FormParam("productoImagen") String imagen,
 			@Context HttpServletResponse servletResponse ) throws IOException{
 		
-		Producto producto = new Producto(0, nombre, cantidad, precio,null); 
+		Producto producto = new Producto(0, nombre, cantidad, precio, imagen); 
 		boolean postOK = productoFacade.newProducto(producto);
 		
-		// Redirigir ??
-		servletResponse.sendRedirect("../rest/productos");
-		
-		//if(putOK) return Response.status(200).entity("PutOK farmacia").build();
-		//else return Response.status(404).entity("Error PUT farmacia").build();		
+		if(postOK) return Response.status(200).build();
+		else return Response.status(404).build();		
 	}
 	
-	/*@PUT	// INSERTAR
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response putFarmacia(servidor.Farmacia farmacia){
-		boolean putOK = farmaciaFacade.newFarmacia(farmacia);
-		
-		if(putOK) return Response.status(200).entity("PutOK farmcia").build();
-		else return Response.status(404).entity("Error PUT farmacia").build();
-	}*/
-	
-	//@Path("/getFarmacias") // En get no debería ser necesario
 	@GET	
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getProductos(){
 		ArrayList<servidor.Producto> productos = productoFacade.getProductos();
 		String productosJSON = gson.toJson(productos);
+		
 		return Response.status(200).entity(productosJSON).build();		 
 	}
 }

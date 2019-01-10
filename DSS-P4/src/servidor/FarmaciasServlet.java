@@ -65,7 +65,7 @@ public class FarmaciasServlet extends HttpServlet {
 		// Recogemos los datos y realizacion la peticion que corresponda
 		switch(opcion){
 		
-		case "prueba":
+		case "addFarmacia":
 			map.add("farmaciaNombre", request.getParameter("farmaciaNombre"));
 			map.add("farmaciaLatitud", request.getParameter("farmaciaLatitud"));
 			map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));			
@@ -74,7 +74,7 @@ public class FarmaciasServlet extends HttpServlet {
 			//String respuesta = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);	
 			Response respuesta = servicio.request().post(Entity.form(map));
 			
-			response.sendRedirect("http://localhost:8080/DSS-P4/rest/farmacias");		
+			response.sendRedirect("http://localhost:8080/DSS-P4/farmacias.jsp");		
 			break;	
 			
 		}
