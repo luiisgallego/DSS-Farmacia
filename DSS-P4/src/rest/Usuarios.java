@@ -59,13 +59,13 @@ public class Usuarios {
 		return respuesta;
 	}
 	
-	/*@GET	
+	@GET	
 	@Produces( MediaType.APPLICATION_JSON )
 	public String getUsuarios(){
 		ArrayList<servidor.Usuario> usuarios = usuarioFacade.getUsuarios();
-		// Tenemos que pasar los usuarios a JSON
 		String usuariosJSON = gson.toJson(usuarios);
+		
 		return usuariosJSON;
-	}*/
+	}
 	
 }

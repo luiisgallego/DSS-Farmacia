@@ -71,7 +71,9 @@
 		//String json = gson.toJson(prueba);
 		// ArrayList<Farmacia> ahora = gson.fromJson(json,new TypeToken<List<Farmacia>>());	
 		
-		String prueba = (String)session.getAttribute("resGET");
+		String prueba = (String)session.getAttribute("resGET"); // toString()
+		
+		// de JSON a JSONArray
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(prueba);
@@ -85,8 +87,9 @@
 	     
         //out.println(inputJson);
         //out.println(prueba);
-	            
-	   //List<Farmacia> farmacias = new Gson().fromJson(prueba, new TypeToken<List<Farmacia>>() {}.getType());
+	      
+        out.println(prueba);
+	   List<Farmacia> farmacias = new Gson().fromJson(prueba, new TypeToken<List<Farmacia>>() {}.getType());
 	   //out.println(farmacias);
 	            
 	            
