@@ -1,17 +1,12 @@
 package com.example.luisalex.farmaciaapp;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
-import com.example.luisalex.farmaciaapp.modelo.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,42 +16,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ActividadFarmacias extends AppCompatActivity {
+public class ActividadProductos extends AppCompatActivity {
     private static final String TAG = "INICIO_FLAG";
-    private String url = "http://192.168.0.158:8080/DSS-P4/rest/farmacias";
-    ArrayList<HashMap<String, String>> farmacias;
+    private String url = "http://192.168.0.158:8080/DSS-P4/rest/productos";
+    ArrayList<HashMap<String, String>> productos;
     private ProgressDialog progress;
-    private ListView tvUser;
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.actividad_farmacias);
-        farmacias = new ArrayList<>();
+        setContentView(R.layout.actividad_productos);
+        productos = new ArrayList<>();
 
-        tvUser = (ListView) findViewById(R.id.actividad_farmacias);
+        lv = (ListView) findViewById(R.id.actividad_productos);
 
         new HTTPGet().execute();
 
-        setTitle("Farmacias");
+        setTitle("Productos");
 
-        registerForContextMenu(tvUser);
-
-        Usuario usuario = new Usuario(3,"Hapneck","Alejandro","Cliente","a@","12345");
-        new HTTPPostUsuario(usuario).execute();
-
-
-        // Pulsamos el botón para ver todos los productos
-        Button b = (Button)findViewById(R.id.mostrar_productos);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActividadFarmacias.this, ActividadProductos.class));
-            }
-        });
+        registerForContextMenu(lv);
 
     }
-
 
     public class HTTPGet extends AsyncTask<Void, Void, Void> {
 
@@ -64,7 +45,7 @@ public class ActividadFarmacias extends AppCompatActivity {
         protected void onPreExecute() {
             // It will use pre defined preExecute method in async task
             super.onPreExecute();
-            progress = new ProgressDialog(ActividadFarmacias.this);
+            progress = new ProgressDialog(ActividadProductos.this);
             // Show what you want in the progress dialog
             progress.setMessage("Cargando...");
             // Progress dialog is not cancellable here
@@ -93,21 +74,21 @@ public class ActividadFarmacias extends AppCompatActivity {
 
                     for (int i = 0; i < f.length(); i++) {
                         JSONObject farmacia = f.getJSONObject(i);
-                        String id = farmacia.getString("ID");
                         String nombre = farmacia.getString("nombre");
-                        String latitud = "latitud: " + farmacia.getString("latitud");
-                        String longitud = "longitud: " + farmacia.getString("longitud");
+                        String cantidad = "Cantidad: " + farmacia.getString("cantidad");
+                        String precio = "Precio: " + farmacia.getString("precio") + "€";
 
                         HashMap<String, String> datos = new HashMap<>();
-                        datos.put("id", id);
                         datos.put("nombre", nombre);
-                        datos.put("latitud", latitud);
-                        datos.put("longitud", longitud);
+                        datos.put("cantidad", cantidad);
+                        datos.put("precio", precio);
 
-                        farmacias.add(datos);
+                        productos.add(datos);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("TEMPORAL", "Ha habido un problema al convertir JSON del get.");
                 }
             }
             else{
@@ -126,36 +107,14 @@ public class ActividadFarmacias extends AppCompatActivity {
             }
 
             android.widget.ListAdapter adapter = new SimpleAdapter(
-                    ActividadFarmacias.this,
-                    farmacias,
-                    R.layout.lista_farmacias,
-                    new String[]{"nombre", "latitud", "longitud"},
-                    new int[]{R.id.list_farmacia, R.id.list_latitud, R.id.list_longitud});
+                    ActividadProductos.this,
+                    productos,
+                    R.layout.lista_productos,
+                    new String[]{"nombre","precio","producto"},
+                    new int[]{R.id.list_nombre, R.id.list_cantidad, R.id.list_precio});
 
-            tvUser.setAdapter(adapter);
+            lv.setAdapter(adapter);
         }
 
-    }
-
-    public class HTTPPostUsuario extends AsyncTask<Void, Void, Void> {
-        private Usuario usuario;
-        public HTTPPostUsuario(Usuario usuario){
-            this.usuario=usuario;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            REST rest = new REST();
-            try {
-                rest.postUsuario(usuario);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
     }
 }
-
-
-
-

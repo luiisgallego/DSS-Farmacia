@@ -5,21 +5,29 @@ import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.luisalex.farmaciaapp.modelo.Producto;
+import com.example.luisalex.farmaciaapp.modelo.Usuario;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+import java.net.URLEncoder;
+import java.util.Iterator;
 
 
 //https://code.tutsplus.com/es/tutorials/android-from-scratch-using-rest-apis--cms-27117
 public class REST{
     private static final String RESTLOG = "REST";
-    private static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";
+    private static final String USER_AGENT = "Mozilla/5.0";
 
     public REST(){
 
@@ -69,23 +77,65 @@ public class REST{
 
     }
 
-    private static void postRecurso(Producto producto) throws IOException {
-        URL url = new URL("http://localhost:8080/DSS-P4/rest/productos");
+    public void postUsuario(Usuario usuario) throws Exception {
+        JSONObject usuarioParams = new JSONObject();
+        usuarioParams.put("nombre",usuario.getNombre());
+        usuarioParams.put("nick",usuario.getNick());
+        usuarioParams.put("pass",usuario.getPass());
+        usuarioParams.put("rol",usuario.getRol());
+        usuarioParams.put("email",usuario.getEmail());
+
+        Log.e(RESTLOG,usuarioParams.toString());
+
+        URL url = new URL("http://192.168.0.158:8080/DSS-P4/rest/usuarios/registro");
         //realizamos la conexión para recibir el json
         HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+        conexion.setConnectTimeout(15000 /* milliseconds */);
         conexion.setRequestMethod("POST");
-        String salida;
+        conexion.setRequestProperty("User-Agent", USER_AGENT);
+        conexion.setRequestProperty("Content-Type", "application/json");
+
+        // For POST only - START
+        conexion.setDoOutput(true);
+        OutputStream os = conexion.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getPostDataString(usuarioParams));
+
+        writer.flush();
+        writer.close();
+        os.close();
+
         // Comprobamos que el recurso accedido es correcto
         if (conexion.getResponseCode() == 200) {
-            InputStream responseBody = conexion.getInputStream();
-            InputStreamReader responseBodyReader = new InputStreamReader(responseBody, "UTF-8");
-            JsonReader jsonReader= new JsonReader(responseBodyReader);
-            salida = jsonReader.toString();
-            jsonReader.close();
-            conexion.disconnect();
+            Log.e(RESTLOG,"POST de usuario realizado con éxito.");
         } else {
-            salida= "Error al conectar con recurso.";
+            Log.e(RESTLOG,"POST de usuario no ha finalizado correctamente. Código: " + conexion.getResponseCode());
         }
+    }
+
+    public String getPostDataString(JSONObject params) throws Exception {
+
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        Iterator<String> itr = params.keys();
+
+        while(itr.hasNext()){
+
+            String key= itr.next();
+            Object value = params.get(key);
+
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+
+        }
+        return result.toString();
     }
 
 }
