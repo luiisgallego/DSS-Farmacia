@@ -38,11 +38,10 @@ public class OrderFacade {
 		}
 	}
 	
-	// No sabemos para que es el campo ID_ORDER en la base de datos.
 	public boolean newOrder(Order o) {
 		String insertarOrder = "INSERT INTO ORDERS"
-				+ "(PRECIO,fk_producto,fk_farmacia,fk_usuario) VALUES"
-				+ "(?,?,?,?)";
+				+ "(PRECIO,fk_producto,fk_farmacia,fk_usuario,ID_ORDER) VALUES"
+				+ "(?,?,?,?,0)";
 		System.out.println(insertarOrder);
 
 		try {
@@ -51,7 +50,7 @@ public class OrderFacade {
 			pstmt.setInt(2, o.getProductoID());
 			pstmt.setInt(3, o.getFarmaciaID());
 			pstmt.setInt(4, o.getUsuarioID());
-			
+			System.out.println(pstmt);
 			pstmt.execute();
 			this.con.close();
 			return true;
@@ -73,6 +72,7 @@ public class OrderFacade {
 			pstmt.setInt(3, o.getFarmaciaID());
 			pstmt.setInt(4, o.getUsuarioID());
 			pstmt.setInt(5, o.getID());
+			System.out.println(pstmt);
 			pstmt.execute();
 			
 			this.con.close();

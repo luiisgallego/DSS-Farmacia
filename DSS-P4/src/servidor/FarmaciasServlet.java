@@ -42,6 +42,7 @@ public class FarmaciasServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// Tomamos la opción enviada en el formulario o en el query
 		opcion = request.getParameter("opcionServlet");
 		map.clear();
 		
@@ -52,13 +53,7 @@ public class FarmaciasServlet extends HttpServlet {
 			String res = servicio.request().get(String.class);
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("getFarmaciasSesion", res);
-			
-			/*request.setAttribute("prueba99", "textPrueba");
-			RequestDispatcher dispacher = request.getRequestDispatcher("farmacias.jsp");
-			dispacher.forward(request, response);*/
-			
-			//System.out.println("JSON servlet Farmacias: " + res);
+			session.setAttribute("getFarmaciasSesion", res);			
 			break;
 			
 		case "deleteFarmacias":			
@@ -68,9 +63,7 @@ public class FarmaciasServlet extends HttpServlet {
 			
 			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");
 			break;
-		}
-		
-		
+		}		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,8 +80,7 @@ public class FarmaciasServlet extends HttpServlet {
 			map.add("farmaciaLatitud", request.getParameter("farmaciaLatitud"));
 			map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));			
 			
-			servicio = client.target(URL).path("/farmacias");
-			//String respuesta = servicio.request().accept(MediaType.APPLICATION_JSON).get(String.class);	
+			servicio = client.target(URL).path("/farmacias");	
 			Response respuesta = servicio.request().post(Entity.form(map));
 			
 			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");	
@@ -106,8 +98,6 @@ public class FarmaciasServlet extends HttpServlet {
 			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");			
 			break;
 			
-		}
-		
+		}		
 	}
-
 }
