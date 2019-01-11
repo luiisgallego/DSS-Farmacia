@@ -1,4 +1,4 @@
-package com.example.luisalex.farmaciaapp;
+package com.example.luisalex.farmaciaapp.modelo;
 
 import android.os.AsyncTask;
 import android.util.JsonReader;

@@ -5,14 +5,24 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.luisalex.farmaciaapp.modelo.DBHelper;
+import com.example.luisalex.farmaciaapp.modelo.REST;
 import com.example.luisalex.farmaciaapp.modelo.Usuario;
+import com.example.luisalex.farmaciaapp.modelo.UsuarioInicio;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class ActividadRegistro extends AppCompatActivity {
+    String sesionID;
     private EditText textNick;
     private EditText textNombre;
     private EditText textEmail;
@@ -20,6 +30,7 @@ public class ActividadRegistro extends AppCompatActivity {
 
     private Button botonRegistrame;
 
+//---------------------------------------------------------------------------------------------------------------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +54,12 @@ public class ActividadRegistro extends AppCompatActivity {
                     // Añadimos a la base MySQL con POST de usuario
                     Usuario usuario = new Usuario(1,textNick.getText().toString(),textNombre.getText().toString(),"Cliente",textEmail.getText().toString(),textPass.getText().toString());
                     new HTTPPostUsuario(usuario).execute();
+                    // Hacemos un Get de ese mismo usuario por su nick para averiguar el id que tiene
+                    new HTTPGet(textNick.getText().toString()).execute();
+                    Log.e("REGISTRO","ID de sesion almacenada: " + sesionID);
+                    // Cambiamos de vista
+                    Intent intent = new Intent(ActividadRegistro.this, ActividadFarmacias.class);
+                    startActivity(intent);
                     // Hacemos un Toast para enseñarselo al usuario
                     Toast.makeText(ActividadRegistro.this, "Usuario registrado", Toast.LENGTH_SHORT).show();
                     // Ponemos todos los campos vacios
@@ -50,8 +67,6 @@ public class ActividadRegistro extends AppCompatActivity {
                     textPass.setText("");
                     textNombre.setText("");
                     textEmail.setText("");
-                    // Entramos en la aplicación
-                    startActivity(new Intent(ActividadRegistro.this, ActividadFarmacias.class));
                 }else{
                     // Si alguno de los campos se encuentra vacío notificamos con un Toast al usuario.
                     Toast.makeText(ActividadRegistro.this, "Campos Vacíos", Toast.LENGTH_SHORT).show();
@@ -59,6 +74,8 @@ public class ActividadRegistro extends AppCompatActivity {
             }
         });
     }
+
+//---------------------------------------------------------------------------------------------------------------------//
 
     private boolean emptyValidation() {
         if (TextUtils.isEmpty(textNick.getText().toString()) || TextUtils.isEmpty(textPass.getText().toString()) || TextUtils.isEmpty(textEmail.getText().toString()) || TextUtils.isEmpty(textNombre.getText().toString()) ) {
@@ -68,6 +85,8 @@ public class ActividadRegistro extends AppCompatActivity {
         }
     }
 
+//---------------------------------------------------------------------------------------------------------------------//
+    // Para hacer un POST  de un nuevo usuario en el momento de registrarse en el servidor del consorcio.
     public class HTTPPostUsuario extends AsyncTask<Void, Void, Void> {
         private Usuario usuario;
         public HTTPPostUsuario(Usuario usuario){
@@ -85,4 +104,45 @@ public class ActividadRegistro extends AppCompatActivity {
             return null;
         }
     }
+
+//---------------------------------------------------------------------------------------------------------------------//
+    // Para hacer GET de un usuario concreto a traves de su nick
+    public class HTTPGet extends AsyncTask<Void, Void, Void> {
+
+        private String nick;
+
+        public HTTPGet(String nick){this.nick=nick;}
+
+        @Override
+        protected Void doInBackground(Void... urls){
+
+            REST rest = new REST();
+            String cadenaJSON = null;
+            try {
+                cadenaJSON = rest.getRecurso("http://192.168.0.158:8080/DSS-P4/rest/usuarios/getMovil/" + nick);
+                Log.e("URL GET", "http://192.168.0.158:8080/DSS-P4/rest/usuarios/getMovil/" + nick);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.e("USUARIO", "Response from URL: " + cadenaJSON);
+
+            if (cadenaJSON != null) {
+                try {
+                    JSONObject jObj = new JSONObject(cadenaJSON);
+                    JSONObject usuario= jObj.getJSONObject("usuario");
+                    String id = usuario.getString("ID");
+                    sesionID=id;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                Log.e("USUARIO", "No se ha conseguido el JSON del servidor");
+            }
+            return null;
+        }
+
+    }
+
+//---------------------------------------------------------------------------------------------------------------------//
 }

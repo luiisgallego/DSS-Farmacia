@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.example.luisalex.farmaciaapp.modelo.Usuario;
+import com.example.luisalex.farmaciaapp.modelo.REST;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +28,7 @@ public class ActividadFarmacias extends AppCompatActivity {
     ArrayList<HashMap<String, String>> farmacias;
     private ProgressDialog progress;
     private ListView tvUser;
-
+//---------------------------------------------------------------------------------------------------------------------//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +63,7 @@ public class ActividadFarmacias extends AppCompatActivity {
 
     }
 
+//---------------------------------------------------------------------------------------------------------------------//
 
     public class HTTPGet extends AsyncTask<Void, Void, Void> {
 
@@ -71,9 +72,9 @@ public class ActividadFarmacias extends AppCompatActivity {
             // It will use pre defined preExecute method in async task
             super.onPreExecute();
             progress = new ProgressDialog(ActividadFarmacias.this);
-            // Show what you want in the progress dialog
-            progress.setMessage("Cargando...");
-            // Progress dialog is not cancellable here
+            // Mostramos un mensaje de dialogo indicando el progreso
+            progress.setMessage("Consultando farmacias...");
+            // No se puede cerrra este diálogo hasta que finalice
             progress.setCancelable(false);
 
             progress.show();
@@ -144,7 +145,7 @@ public class ActividadFarmacias extends AppCompatActivity {
         }
 
     }
-
+//---------------------------------------------------------------------------------------------------------------------//
 
 }
 

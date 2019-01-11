@@ -1,4 +1,4 @@
-package com.example.luisalex.farmaciaapp;
+package com.example.luisalex.farmaciaapp.modelo;
 
 import com.example.luisalex.farmaciaapp.modelo.Producto;
 
@@ -7,11 +7,11 @@ import java.util.HashMap;
 public class Carrito {
 
     private HashMap<String,Producto> productos;
-    private float importe;
+    private int importe;
 
     public Carrito(){
         productos = new HashMap<>();
-        importe = 0.0f;
+        importe = 0;
     }
 
     public void addProducto(Producto p){
@@ -40,7 +40,7 @@ public class Carrito {
         this.productos = productos;
     }
 
-    public void setImporte(float importe) {
+    public void setImporte(int importe) {
         this.importe = importe;
     }
 

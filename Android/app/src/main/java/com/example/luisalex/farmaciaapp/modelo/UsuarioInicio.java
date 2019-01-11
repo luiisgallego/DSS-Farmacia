@@ -1,4 +1,4 @@
-package com.example.luisalex.farmaciaapp;
+package com.example.luisalex.farmaciaapp.modelo;
 
 public class UsuarioInicio {
     private int id;

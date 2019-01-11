@@ -35,6 +35,30 @@ Por último, una vez lanzado el proyecto, al primera pantalla que nos encontramo
 
 \section{Android APP}
 
+Para el correcto funcionamiento del proyecto que presentamos, en la parte de Android habrá que realizar los siguientes pasos a la hora de utilizarlo.\\
+
+Primero, es importante que el servidor web este operativo siguiendo las instrucciones anteriormente descritas, junto con la base de datos de consorcio en mysql.\\
+
+Es importante destacar que se ha conectado Android a este servicio por medio de una red privada, esto quiere decir que las URLs utilizadas por Android para realizar las distintas peticiones REST no utilizan ``localhost'', si no 192.168.0.158 (IP privada del ordenador con el servicio en ese momento). Si se cambia esta ip deberá de ser modificada en el código de Android.\\
+
+Otro punto importante, si la conexión en las peticiones nos aparece un Time Out (no un Connection Failure), seguramente sea debido a el Firewall, se puede solucionar desactivándolo temporalmente.\\
+
+Para probar el proyecto simplemente basta con abrir Android Studio, importar un nuevo proyecto y la carpeta ``Android'' de esta práctica debería ser reconocida por el IDE. \\
+
+Finalmente para ejecutarlo nos vamos a la pestaña de ``Run $>$ Run app'' y Android Studio debe reconocer el dispositivo móvil. \\
+
+Si no aparece el dispositivo comprobar:
+
+\begin{enumerate}
+	\item El dispositivo se encuentra conectado por USB al PC.
+	\item Habilitar las \href{https://www.xatakandroid.com/sistema-operativo/opciones-de-desarrollo-de-android-para-que-sirven-y-cuales-deberiamos-activar}{opciones de desarrollador} en el dispositivo.
+	\item Permitir \href{https://androidstudiofaqs.com/tutoriales/android-studio-no-reconoce-movil-solucion}{depuración por USB} en el dispositivo.
+\end{enumerate}
+
+Se implementa una base de datos interna SQLite a parte del servicio web con las base de datos en mysql para el consorcio. La finalidad de ésta es facilitar tareas tales como el log in de un nuevo usuario y la compra de productos (los pedidos se hacen mediante POST al servicio web igualmente). \\
+
+Las pruebas de esta práctica se han realizado con un Samsung Galaxy S7 Edge con una versión de Android 7.0, aunque debería de ser compatible con cualquier versión.
+
 
 \end{document}       
 %---------------------------------------------------
