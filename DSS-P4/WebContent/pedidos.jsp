@@ -3,6 +3,7 @@
     <%@ page import="com.google.gson.Gson" %>
 	<%@ page import="com.google.gson.reflect.TypeToken" %>
 	<%@ page import="servidor.Farmacia" %>
+	<%@ page import="servidor.Order" %>
 	<%@ page import="java.util.List" %>
 	<%@ page import="java.util.Map" %>
 	<%@ page import="java.lang.reflect.Type" %>
@@ -22,53 +23,45 @@
 		
 		<script type="text/javascript"> 
 		$(document).ready(function() {		 
-			$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
+			$.get("../DSS-P4/OrdersServlet?opcionServlet=getPedidos",function(response) { });		 
 		});
-		</script>
-		
+		</script>		
 		<%		
 			Gson gson = new Gson();
-			ArrayList<Farmacia> farmaciasTotal = new ArrayList<Farmacia>();
+			ArrayList<Order> pedidosTotal = new ArrayList<Order>();
 			
-			if(session.getAttribute("getFarmaciasSesion") != null) {
-				//HttpSession session = request.getSession();
-				String prueba = session.getAttribute("getFarmaciasSesion").toString();		
-				JSONObject obj = new JSONObject(prueba);
-				JSONArray jsonArray = obj.getJSONArray("farmacias");		
-				//JSONArray jsonArray = new JSONArray();		
-				
-				//String aux = request.getAttribute("prueba99").toString();
-				//out.println("REQUEST: " + aux);			
+			if(session.getAttribute("getPedidosSesion") != null) {
+				String pedidosSesion = session.getAttribute("getPedidosSesion").toString();		
+				JSONObject obj = new JSONObject(pedidosSesion);
+				JSONArray jsonArray = obj.getJSONArray("pedidos");						
 				
 				for(int i=0; i<jsonArray.length(); i++){
 					JSONObject item = jsonArray.getJSONObject(i);
-					Farmacia farmacia = new Farmacia();
+					Order pedido = new Order();
 					
-					String prueba1 = item.get("ID").toString();
-					int num = Integer.parseInt(prueba1);
-					//farmacia.setID(Integer.parseInt(item.getString("ID")));
-					String nombre = item.get("nombre").toString();
-					//farmacia.setNombre(item.getString("nombre"));
-					String prueba2 = item.get("latitud").toString();			
-					float num2 = Float.parseFloat(prueba2);
-					//farmacia.setLatitud(Float.parseFloat(item.getString("latitud")));
-					String prueba3 = item.get("longitud").toString();
-					float num3 = Float.parseFloat(prueba3);
-					//farmacia.setLatitud(Float.parseFloat(item.getString("longitud")));
+					String aux1 = item.get("ID").toString();
+					int ID = Integer.parseInt(aux1);
+					String aux2 = item.get("precio").toString();
+					int precio = Integer.parseInt(aux2);
+					String aux3 = item.get("productoID").toString();
+					int productoID = Integer.parseInt(aux3);
+					String aux4 = item.get("farmaciaID").toString();
+					int farmaciaID = Integer.parseInt(aux4);
+					String aux5 = item.get("usuarioID").toString();
+					int usuarioID = Integer.parseInt(aux5);
 					
-					farmacia.setID(num);
-					farmacia.setNombre(nombre);
-					farmacia.setLatitud(num2);
-					farmacia.setLongitud(num3);			
 					
-					//out.println("\n\n\nFarmacia " + i + ":  " + farmacia.getID());
-					farmaciasTotal.add(farmacia);
+					pedido.setID(ID);
+					pedido.setPrecio(precio);
+					pedido.setProductoID(productoID);
+					pedido.setFarmaciaID(farmaciaID);
+					pedido.setUsuarioID(usuarioID);
+					pedidosTotal.add(pedido);
 				}
 			} else {			
 				response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");
 			}
-		%>
-		
+		%>		
 	</head>
 	</head>
 	<body>		
@@ -108,45 +101,44 @@
 		
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
-					<div class="container" style="margin-top:30px;">
+				<div class="col-md-8 offset-md-1" style="margin-top:50px;">
+					<h3 style="margin-bottom: 20px;">Listado de pedidos realizados:</h3>
+					<div class="container">
 						<div class="row">
-							<h3 class="col-md-12">Añade un nuevo pedido:</h3>
-							<form action="../DSS-P4/OrdersServlet" method="POST">
-								<div class="form-group row" style="margin-top:20px;">
-								  <label class="col-2 col-form-label">precio</label>
-								  <div class="col-md-8" style="margin-left:50px;">
-								    <input class="form-control" type="text" name="precio">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <label class="col-2 col-form-label">usuarioID</label>
-								  <div class="col-8" style="margin-left:50px;">
-								    <input class="form-control" type="text" name="usuarioID">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <label class="col-2 col-form-label">productoID</label>
-								  <div class="col-8" style="margin-left:50px;">
-								    <input class="form-control" type="text" name="productoID">
-								  </div>
-								</div>	
-								<div class="form-group row">
-								  <label class="col-2 col-form-label">farmaciaID</label>
-								  <div class="col-8" style="margin-left:50px;">
-								    <input class="form-control" type="text" name="farmaciaID">
-								  </div>
-								</div>
-								<input name="opcionServlet" type="hidden" value="addPedidos" />  						   
-						        <div class="form-group">
-						            <button type="submit" class="btn btn-primary btn-block">Añadir</button>
-						        </div>						
-							</form>
+							<div class="col-md-6">
+								<table class="table table-striped">
+								  <thead>
+								    <tr>
+								      <th scope="col">ID</th>
+								      <th scope="col">Precio</th>
+								      <th scope="col">ID Producto</th>
+								      <th scope="col">ID Farmacia</th>
+								      <th scope="col">ID Usuario</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								  <%									  
+									  for(int i=0; i<pedidosTotal.size(); i++){
+										  Order pedido = new Order();
+										  pedido = pedidosTotal.get(i);
+										  
+										  //String urlBorrar = "../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID();
+										  //String urlEditar = "../DSS-P4/editarFarmacias.jsp?ID="
+										  //+ farmacia.getID() + "&nombre=" + farmacia.getNombre() + "&latitud=" + farmacia.getLatitud() + "&longitud=" + farmacia.getLongitud();
+										  out.println("<tr>");
+										  out.println("<th>"+ pedido.getID()  +"</th>");
+										  out.println("<td>"+ pedido.getPrecio() +"</td>");
+										  out.println("<td>"+ pedido.getProductoID()  +"</td>");
+										  out.println("<td>"+ pedido.getFarmaciaID()  +"</td>");
+										  out.println("<td>"+ pedido.getUsuarioID()  +"</td>");
+										  out.println("</tr>");						  
+									  }													 
+								  %>
+								  </tbody>
+								</table>
+							</div>
 						</div>
-					</div>				
-				</div>
-				<div class="col-md-6" style="margin-top:50px;">
-									
+					</div>									
 				</div>
 			</div>
 		</div>  		

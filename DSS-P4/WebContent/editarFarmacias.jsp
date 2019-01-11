@@ -19,16 +19,13 @@
 		<script src="JS/jquery-1.11.0.min.js"></script>
 		<script src="JS/bootstrap.min.js"></script>
 		<!--  CSS -->
-		<link href="CSS/estilo.css" rel="stylesheet" />
-		
+		<link href="CSS/estilo.css" rel="stylesheet" />		
 		<%
-		String ID = request.getParameter("ID");
-		String nombre = request.getParameter("nombre");
-		String latitud = request.getParameter("latitud");
-		String longitud = request.getParameter("longitud");
-		%>
-		
-	</head>
+			String ID = request.getParameter("ID");
+			String nombre = request.getParameter("nombre");
+			String latitud = request.getParameter("latitud");
+			String longitud = request.getParameter("longitud");
+		%>		
 	</head>
 	<body>		
 		<!-- NAVEGACION -->

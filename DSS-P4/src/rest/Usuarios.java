@@ -11,6 +11,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -49,8 +50,6 @@ public class Usuarios {
 			@FormParam("rol") String rol,
 			@FormParam("email") String email) {
 		
-		System.out.println("Dentro");
-		
 		Usuario usuario = new Usuario(0, nick, nombre, rol,email, pass); 
 		boolean postOK = usuarioFacade.newUsuario(usuario);
 		
@@ -74,6 +73,14 @@ public class Usuarios {
 		
 		return Response.status(200).entity("{\n\"usuarios\" :" + usuariosJSON+ "\n}").build();
 		//return usuariosJSON;
+	}
+	
+	@GET	
+	@Produces( MediaType.TEXT_HTML )	
+	@Path("getMovil/{nick}")
+	public Response getMovil(@PathParam("nick") String nick){ 		
+		Response respuesta = usuarioFacade.getUsuarioNick(nick);	
+		return respuesta;
 	}
 	
 }

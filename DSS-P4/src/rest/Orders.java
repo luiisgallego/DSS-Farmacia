@@ -26,8 +26,7 @@ public class Orders {
 	
 	public Orders(){
 		orderFacade = new OrderFacade();
-	}
-	
+	}	
 	
 	@POST	// CREAR
 	@Produces(MediaType.TEXT_PLAIN)
@@ -51,6 +50,5 @@ public class Orders {
 		String ordersJSON = gson.toJson(orders);
 		
 		return Response.status(200).entity("{\n\"pedidos\" :" + ordersJSON+ "\n}").build();
-		//return Response.status(200).entity(ordersJSON).build();
 	}
 }

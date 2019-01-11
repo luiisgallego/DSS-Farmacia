@@ -10,19 +10,15 @@
 		<script src="JS/jquery-1.11.0.min.js"></script>
 		<script src="JS/bootstrap.min.js"></script>
 		<!--  CSS -->
-		<link href="CSS/estilo.css" rel="stylesheet" />	
-		
+		<link href="CSS/estilo.css" rel="stylesheet" />			
 		<script type="text/javascript"> 
-		$(document).ready(function() {		 
-			$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
-		});
+			$(document).ready(function() {		 
+				$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });	
+				$.get("../DSS-P4/OrdersServlet?opcionServlet=getPedidos",function(response) { });		 
+			});
 		</script>
-		
-		<% //HttpSession session = request.getSession(); %>
 	</head>
-	</head>
-	<body>	
-	
+	<body>		
 		<div class="login-form">
 		    <form action="../DSS-P4/UsuariosServlet" method="POST"">
 		        <h2 class="text-center">LOGIN</h2>       
@@ -38,8 +34,6 @@
 		        <input name="opcionServlet" type="hidden" value="login" />       
 		    </form>
 		    <p class="text-center"><a href="../DSS-P4/registrar.jsp">REGISTRATE</a></p>
-		</div>
-		
-  		
+		</div>  		
 	</body>
 </html>

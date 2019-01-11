@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -16,9 +17,7 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class OrdersServlet
- */
+
 @WebServlet("/OrdersServlet")
 public class OrdersServlet extends HttpServlet {
 	
@@ -36,20 +35,28 @@ public class OrdersServlet extends HttpServlet {
     
     public OrdersServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// Tomamos la opción enviada en el formulario o en el query
+		opcion = request.getParameter("opcionServlet");
+		map.clear();
+		
+		switch(opcion){
+		
+		case "getPedidos":
+			servicio = client.target(URL).path("/pedidos");
+			String res = servicio.request().get(String.class);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("getPedidosSesion", res);			
+			break;
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Tomamos la opción enviada en el formulario

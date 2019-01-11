@@ -10,17 +10,15 @@
 		<script src="JS/jquery-1.11.0.min.js"></script>
 		<script src="JS/bootstrap.min.js"></script>
 		<!--  CSS -->
-		<link href="CSS/estilo.css" rel="stylesheet" />
-		
+		<link href="CSS/estilo.css" rel="stylesheet" />		
 		<script type="text/javascript"> 
-		$(document).ready(function() {		 
-			$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
-		});
+			$(document).ready(function() {		 
+				$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });
+				$.get("../DSS-P4/OrdersServlet?opcionServlet=getPedidos",function(response) { });		 
+			});
 		</script>
 	</head>
-	</head>
 	<body>		
-		<!-- NAVEGACION -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <a class="navbar-brand" href="#"></a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,8 +52,7 @@
 			</div>
 		</div>
 		
-		<h1>PRINCIPAL</h1>
-		
+		<h1>PRINCIPAL</h1>		
   		
 	</body>
 </html>

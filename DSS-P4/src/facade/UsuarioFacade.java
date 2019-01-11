@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import javax.ws.rs.core.Response;
 
+import com.google.gson.Gson;
+
 import servidor.Db;
 import servidor.Usuario;
 
@@ -19,6 +21,7 @@ public class UsuarioFacade {
 	Connection con = null;
 	
 	PreparedStatement pstmt = null;
+	private Gson gson = new Gson();
 	
 	public UsuarioFacade() {
 		try {
@@ -142,6 +145,37 @@ public class UsuarioFacade {
 		else status = 200;
 		
 		return Response.status(status).build();
-	}	
+	}
+	
+	public Response getUsuarioNick(String nick){	
+		String getUsers = "SELECT * FROM USER WHERE NICK='"+nick+"'";
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		Usuario usuario = new Usuario();
+		Integer status;
+		
+		try {
+			stmt = this.con.createStatement();
+			this.rs = stmt.executeQuery(getUsers);
+			
+			while(rs.next()) {
+				usuarios.add(new Usuario(rs.getInt("ID"),rs.getString("NICK"),rs.getString("NOMBRE"),rs.getString("ROL"),rs.getString("EMAIL"),rs.getString("PASS")));
+				usuario.setID(rs.getInt("ID"));
+				usuario.setNick(rs.getString("NICK"));
+				usuario.setNombre(rs.getString("NOMBRE"));
+				usuario.setRol(rs.getString("ROL"));
+				usuario.setEmail(rs.getString("EMAIL"));
+				usuario.setPass(rs.getString("PASS"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}		
+		
+		if(usuarios == null || usuarios.size() == 0) status = 404;
+		else status = 200;
+		
+		String usuarioJSON = gson.toJson(usuario);
+		return Response.status(status).entity("{\n\"usuario\" :" + usuarioJSON+ "\n}").build();
+	}
 	
 }

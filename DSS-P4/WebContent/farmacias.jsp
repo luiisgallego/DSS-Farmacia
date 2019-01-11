@@ -22,44 +22,39 @@
 		<link href="CSS/estilo.css" rel="stylesheet" />
 		
 		<script type="text/javascript"> 
-		$(document).ready(function() {		 
-			$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
-		});
-		</script>
-		
+			$(document).ready(function() {		 
+				$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });		 
+			});
+		</script>		
 		<%		
 			Gson gson = new Gson();
 			ArrayList<Farmacia> farmaciasTotal = new ArrayList<Farmacia>();
 			
 			if(session.getAttribute("getFarmaciasSesion") != null) {
-				//HttpSession session = request.getSession();
-				String prueba = session.getAttribute("getFarmaciasSesion").toString();		
-				JSONObject obj = new JSONObject(prueba);
-				JSONArray jsonArray = obj.getJSONArray("farmacias");		
-				//JSONArray jsonArray = new JSONArray();				
+				String farmaciasSesion = session.getAttribute("getFarmaciasSesion").toString();		
+				JSONObject obj = new JSONObject(farmaciasSesion);
+				JSONArray jsonArray = obj.getJSONArray("farmacias");						
 				
 				for(int i=0; i<jsonArray.length(); i++){
 					JSONObject item = jsonArray.getJSONObject(i);
 					Farmacia farmacia = new Farmacia();
 					
-					String prueba1 = item.get("ID").toString();
-					int num = Integer.parseInt(prueba1);
+					String aux1 = item.get("ID").toString();
+					int ID = Integer.parseInt(aux1);
 					//farmacia.setID(Integer.parseInt(item.getString("ID")));
 					String nombre = item.get("nombre").toString();
 					//farmacia.setNombre(item.getString("nombre"));
-					String prueba2 = item.get("latitud").toString();			
-					float num2 = Float.parseFloat(prueba2);
+					String aux2 = item.get("latitud").toString();			
+					float latitud = Float.parseFloat(aux2);
 					//farmacia.setLatitud(Float.parseFloat(item.getString("latitud")));
-					String prueba3 = item.get("longitud").toString();
-					float num3 = Float.parseFloat(prueba3);
+					String aux3 = item.get("longitud").toString();
+					float longitud = Float.parseFloat(aux3);
 					//farmacia.setLatitud(Float.parseFloat(item.getString("longitud")));
 					
-					farmacia.setID(num);
+					farmacia.setID(ID);
 					farmacia.setNombre(nombre);
-					farmacia.setLatitud(num2);
-					farmacia.setLongitud(num3);			
-					
-					//out.println("\n\n\nFarmacia " + i + ":  " + farmacia.getID());
+					farmacia.setLatitud(latitud);
+					farmacia.setLongitud(longitud);							
 					farmaciasTotal.add(farmacia);
 				}
 			} else {			
@@ -67,7 +62,6 @@
 			}
 		%>
 		
-	</head>
 	</head>
 	<body>		
 		<!-- NAVEGACION -->
@@ -165,7 +159,6 @@
 										  out.println("<td>"+ farmacia.getNombre()  +"</td>");
 										  out.println("<td>"+ farmacia.getLatitud()  +"</td>");
 										  out.println("<td>"+ farmacia.getLongitud()  +"</td>");
-										  //out.println("<td><a href=\"../DSS-P4/FarmaciasServlet?opcionServlet=deleteFarmacias&ID="+ farmacia.getID() +"\">BORRAR</a></td>");
 										  out.println("<td><a href=\"" + urlBorrar +"\">BORRAR</a></td>");
 										  out.println("<td><a href=\"" + urlEditar +"\">EDITAR</a></td>");
 										  out.println("</tr>");						  

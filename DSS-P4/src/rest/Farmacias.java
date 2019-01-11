@@ -71,7 +71,6 @@ public class Farmacias {
 		String farmaciasJSON = gson.toJson(farmacias);
 		
 		return Response.status(200).entity("{\n\"farmacias\" :" + farmaciasJSON+ "\n}").build();
-		//return Response.status(200).entity(farmaciasJSON).build();
 	}	
 	
 	@DELETE
