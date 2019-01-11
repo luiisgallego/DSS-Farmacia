@@ -42,10 +42,6 @@ public class ActividadFarmacias extends AppCompatActivity {
 
         registerForContextMenu(tvUser);
 
-        Usuario usuario = new Usuario(3,"Hapneck","Alejandro","Cliente","a@","12345");
-        new HTTPPostUsuario(usuario).execute();
-
-
         // Pulsamos el botón para ver todos los productos
         Button b = (Button)findViewById(R.id.mostrar_productos);
         b.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +85,9 @@ public class ActividadFarmacias extends AppCompatActivity {
 
             if (cadenaJSON != null) {
                 try {
-                    JSONArray f = new JSONArray(cadenaJSON);
+                    JSONObject jObj = new JSONObject(cadenaJSON);
+                    JSONArray f = jObj.getJSONArray("farmacias");
+
 
                     for (int i = 0; i < f.length(); i++) {
                         JSONObject farmacia = f.getJSONObject(i);
@@ -137,23 +135,7 @@ public class ActividadFarmacias extends AppCompatActivity {
 
     }
 
-    public class HTTPPostUsuario extends AsyncTask<Void, Void, Void> {
-        private Usuario usuario;
-        public HTTPPostUsuario(Usuario usuario){
-            this.usuario=usuario;
-        }
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            REST rest = new REST();
-            try {
-                rest.postUsuario(usuario);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
 }
 
 

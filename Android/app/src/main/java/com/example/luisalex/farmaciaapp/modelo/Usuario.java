@@ -17,7 +17,9 @@ public class Usuario {
 		this.email = null;
 		this.pass = null;
 	}
-	
+
+
+
 	public Usuario (int ID, String nick, String nombre, String rol, String email, String pass) {
 		this.ID = ID;
 		this.nick = nick;
@@ -73,5 +75,14 @@ public class Usuario {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	@Override
+	public String toString() {
+		return "nombre=" + this.nombre + "&" +
+				"nick=" + this.nick + "&" +
+				"pass=" + this.pass + "&" +
+				"rol=" + this.rol + "&" +
+				"email=" + this.email;
 	}
 }
