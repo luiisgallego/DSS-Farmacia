@@ -1,0 +1,40 @@
+\documentclass[a4paper,12pt,oneside]{article}
+
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+\usepackage{graphicx}
+\usepackage{amssymb, amsmath, amsbsy}
+\usepackage{mathptmx}	
+\usepackage{float}
+\usepackage{booktabs}					%paquete para realización de tablas profesionales
+
+\title{Práctica 4 DSS \\ Manual de instalación}
+\author{Alejandro Campoy Nieves \\ Luis Gallego Quero}
+\date{\today}
+
+\begin{document}
+\maketitle			
+ 
+\section{Web APP}
+
+Para el correcto funcionamiento del proyecto que presentamos, en la parte del servicio web habrá que realizar los siguientes pasos a la hora de la instalación. \\
+
+Como primer paso, importar la base de datos consorcio.sql a mysql, la cual podemos encontrarla en el directorio principal de la carpeta DSS-P4. Posteriormente podemos añadir la carpeta DSS-P4 a nuestra carpeta de eclipse y abrir el proyecto en dicha herramienta. \\
+
+Un paso importante es comprobar que todas las librerías que podemos encontrar en DSS-P4 $>$ WebContent $>$ lib están correctamente insertadas en el Build Path. Una vez llegados a este punto ya estamos listos para hacer Run Server del proyecto. \\
+
+Como último detalle en el paquete servidor, archivo Db.java se ha establecido la conexión con la base de datos mysql, siendo el usuario root y no estableciendo contraseña ninguna. Esto hay que cambiarlo en el caso de que los datos de acceso a mysql propio difieran de estos. Sin más, con los pasos presentados el proyecto debería ser completamente funcional. \\
+
+Por último, una vez lanzado el proyecto, al primera pantalla que nos encontramos es la de login, en la cual tenemos dos opciones. O bien acceder con usuario admin y contraseña admin o bien registrar nuestro propio usuario con el cual accederemos directamente a la aplicación. En esta, en la barra de navegación superior podemos encontrar las diferentes secciones que contiene el proyecto.
+
+\section{Android APP}
+
+
+\end{document}       
+%---------------------------------------------------
