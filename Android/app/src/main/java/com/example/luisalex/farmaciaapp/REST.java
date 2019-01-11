@@ -102,6 +102,31 @@ public class REST{
         }
     }
 
+    public void postPedido(String stringOrder) throws Exception {
+
+        URL url = new URL("http://192.168.0.158:8080/DSS-P4/rest/pedidos");
+        //realizamos la conexión para recibir el json
+        HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+        conexion.setConnectTimeout(15000 /* milliseconds */);
+        conexion.setRequestMethod("POST");
+        conexion.setRequestProperty("User-Agent", USER_AGENT);
+        //conexion.setRequestProperty("Content-Type", "application/json");
+
+        // For POST only - START
+        conexion.setDoOutput(true);
+        OutputStream os = conexion.getOutputStream();
+        os.write(stringOrder.getBytes());
+        os.flush();
+        os.close();
+
+        // Comprobamos que el recurso accedido es correcto
+        if (conexion.getResponseCode() == 200) {
+            Log.e(RESTLOG,"POST de pedido realizado con éxito.");
+        } else {
+            Log.e(RESTLOG,"POST de pedido no ha finalizado correctamente. Código: " + conexion.getResponseCode());
+        }
+    }
+
     public String getPostDataString(JSONObject params) throws Exception {
 
         StringBuilder result = new StringBuilder();
