@@ -34,14 +34,6 @@ public class Usuarios {
 	}
 	
 	@POST	// CREAR
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/ALEX")
-	public Response postUsuario2() {		
-		System.out.println("Vamos ALEX");		
-		return Response.status(200).build();			 
-	}
-	
-	@POST	// CREAR
 	@Produces( MediaType.TEXT_HTML )
 	@Path("registro")
 	public Response postUsuario(@FormParam("nombre") String nombre,
@@ -72,7 +64,6 @@ public class Usuarios {
 		String usuariosJSON = gson.toJson(usuarios);
 		
 		return Response.status(200).entity("{\n\"usuarios\" :" + usuariosJSON+ "\n}").build();
-		//return usuariosJSON;
 	}
 	
 	@GET	
@@ -81,6 +72,5 @@ public class Usuarios {
 	public Response getMovil(@PathParam("nick") String nick){ 		
 		Response respuesta = usuarioFacade.getUsuarioNick(nick);	
 		return respuesta;
-	}
-	
+	}	
 }

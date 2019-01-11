@@ -41,15 +41,11 @@
 					
 					String aux1 = item.get("ID").toString();
 					int ID = Integer.parseInt(aux1);
-					//farmacia.setID(Integer.parseInt(item.getString("ID")));
 					String nombre = item.get("nombre").toString();
-					//farmacia.setNombre(item.getString("nombre"));
 					String aux2 = item.get("latitud").toString();			
 					float latitud = Float.parseFloat(aux2);
-					//farmacia.setLatitud(Float.parseFloat(item.getString("latitud")));
 					String aux3 = item.get("longitud").toString();
 					float longitud = Float.parseFloat(aux3);
-					//farmacia.setLatitud(Float.parseFloat(item.getString("longitud")));
 					
 					farmacia.setID(ID);
 					farmacia.setNombre(nombre);
@@ -130,7 +126,8 @@
 						</div>
 					</div>				
 				</div>
-				<div class="col-md-6" style="margin-top:50px;">
+				<div class="col-md-6" style="margin-top:30px;">
+					<h3 style="margin-bottom: 20px;">Listado de farmacias:</h3>
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6">

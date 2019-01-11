@@ -55,7 +55,7 @@ public class UsuarioFacade {
 			pstmt.setString(4, u.getEmail());
 			pstmt.setString(5, u.getPass());
 			
-			//System.out.println(pstmt);
+			System.out.println(pstmt);
 			pstmt.execute(); 
 			this.con.close();
 			return true;
@@ -127,6 +127,7 @@ public class UsuarioFacade {
 		
 		String getUsers = "SELECT * FROM USER WHERE NOMBRE='"+username+"' and PASS='"+password+"'";
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		int ID;
 		Integer status;
 		
 		try {
@@ -176,6 +177,5 @@ public class UsuarioFacade {
 		
 		String usuarioJSON = gson.toJson(usuario);
 		return Response.status(status).entity("{\n\"usuario\" :" + usuarioJSON+ "\n}").build();
-	}
-	
+	}	
 }

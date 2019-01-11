@@ -47,7 +47,7 @@
 		</nav>		
 		<div class="header estiloHeader">
 			<div class="container">
-				<div class="col-md-6 offset-md-2 estiloHeaderH1">
+				<div class="col-md-6 offset-md-3 estiloHeaderH1">
 					<h1 style="text-align: center;">Consorcio Farmacias</h1>
 				</div>
 			</div>

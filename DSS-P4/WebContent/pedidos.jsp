@@ -48,8 +48,7 @@
 					String aux4 = item.get("farmaciaID").toString();
 					int farmaciaID = Integer.parseInt(aux4);
 					String aux5 = item.get("usuarioID").toString();
-					int usuarioID = Integer.parseInt(aux5);
-					
+					int usuarioID = Integer.parseInt(aux5);					
 					
 					pedido.setID(ID);
 					pedido.setPrecio(precio);
@@ -93,15 +92,14 @@
 		</nav>		
 		<div class="header estiloHeader">
 			<div class="container">
-				<div class="col-md-6 offset-md-2 estiloHeaderH1">
+				<div class="col-md-6 offset-md-3 estiloHeaderH1">
 					<h1 style="text-align: center;">Consorcio Farmacias</h1>
 				</div>
 			</div>
-		</div>
-		
+		</div>		
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 offset-md-1" style="margin-top:50px;">
+				<div class="col-md-8" style="margin-top:30px;">
 					<h3 style="margin-bottom: 20px;">Listado de pedidos realizados:</h3>
 					<div class="container">
 						<div class="row">

@@ -42,7 +42,6 @@ public class ProductoFacade {
 		String insertarProducto = "INSERT INTO PRODUCTO"
 				+ "(NOMBRE,CANTIDAD,PRECIO,IMAGEN) VALUES"
 				+ "(?,?,?,?)";
-		System.out.println(insertarProducto);
 
 		try {
 			pstmt = this.con.prepareStatement(insertarProducto);
@@ -118,6 +117,4 @@ public class ProductoFacade {
 		}
 		return productos;
 	}
-	
-	
 }

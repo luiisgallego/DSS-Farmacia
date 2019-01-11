@@ -13,8 +13,7 @@
 		<link href="CSS/estilo.css" rel="stylesheet" />
 	</head>
 	</head>
-	<body>	
-	
+	<body>		
 		<div class="registro-form">
 		    <form action="../DSS-P4/UsuariosServlet" method="POST">
 		        <h2 class="text-center">REGISTRAR</h2> 
@@ -44,9 +43,6 @@
 		        </div> 
 		        <input name="opcionServlet" type="hidden" value="registrar" />       
 		    </form>
-		    <p class="text-center"><a href="../DSS-P4/registrar.jsp">REGISTRATE</a></p>
-		</div>
-		
-  		
+		</div>  		
 	</body>
 </html>

@@ -30,13 +30,11 @@ public class ProductosServlet extends HttpServlet {
 	Client client = ClientBuilder.newClient();
 	WebTarget servicio;
 	Response respuesta;
-	HttpServletResponse responseRedirect; 
-       
+	HttpServletResponse responseRedirect;        
 
     public ProductosServlet() {
         super();
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -46,16 +44,16 @@ public class ProductosServlet extends HttpServlet {
 		
 		switch(opcion){
 		
-		case "getFarmacias":
-			servicio = client.target(URL).path("/farmacias");
+		case "getProductos":
+			servicio = client.target(URL).path("/productos");
 			String res = servicio.request().get(String.class);
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("getFarmaciasSesion", res);			
+			session.setAttribute("getProductosSesion", res);			
 			break;
 			
-		case "deleteFarmacias":			
-			String aux = "/farmacias/"+request.getParameter("ID");
+		case "deleteProductos":			
+			String aux = "/productos/"+request.getParameter("ID");
 			servicio = client.target(URL).path(aux);	
 			Response respuesta = servicio.request().delete();
 			
@@ -63,7 +61,6 @@ public class ProductosServlet extends HttpServlet {
 			break;
 		}
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -74,24 +71,24 @@ public class ProductosServlet extends HttpServlet {
 		// Recogemos los datos y realizacion la peticion que corresponda
 		switch(opcion){
 		
-		case "addFarmacia":
-			map.add("farmaciaNombre", request.getParameter("farmaciaNombre"));
-			map.add("farmaciaLatitud", request.getParameter("farmaciaLatitud"));
-			map.add("farmaciaLongitud", request.getParameter("farmaciaLongitud"));			
+		case "addProductos":
+			map.add("productoNombre", request.getParameter("productoNombre"));
+			map.add("productoCantidad", request.getParameter("productoCantidad"));
+			map.add("productoPrecio", request.getParameter("productoPrecio"));			
 			
-			servicio = client.target(URL).path("/farmacias");	
+			servicio = client.target(URL).path("/productos");	
 			Response respuesta = servicio.request().post(Entity.form(map));
 			
 			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");	
 			break;	
 			
-		case "editarFarmacias":						
+		case "editarProductos":						
 			map.add("ID", request.getParameter("ID"));
-			map.add("nombre", request.getParameter("farmaciaNombre"));
-			map.add("latitud", request.getParameter("farmaciaLatitud"));
-			map.add("longitud", request.getParameter("farmaciaLongitud"));
+			map.add("nombre", request.getParameter("productoNombre"));
+			map.add("cantidad", request.getParameter("productoCantidad"));
+			map.add("precio", request.getParameter("productoPrecio"));
 			
-			servicio = client.target(URL).path("farmacias");
+			servicio = client.target(URL).path("productos");
 			Response respuesta2 = servicio.request().put(Entity.form(map));
 			
 			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");			
@@ -99,5 +96,4 @@ public class ProductosServlet extends HttpServlet {
 			
 		}
 	}
-
 }

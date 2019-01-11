@@ -37,7 +37,6 @@ public class OrdersServlet extends HttpServlet {
         super();
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Tomamos la opción enviada en el formulario o en el query
@@ -55,7 +54,6 @@ public class OrdersServlet extends HttpServlet {
 			break;
 		}
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

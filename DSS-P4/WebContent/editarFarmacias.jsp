@@ -56,15 +56,14 @@
 		</nav>		
 		<div class="header estiloHeader">
 			<div class="container">
-				<div class="col-md-6 offset-md-2 estiloHeaderH1">
+				<div class="col-md-6 offset-md-3 estiloHeaderH1">
 					<h1 style="text-align: center;">Consorcio Farmacias</h1>
 				</div>
 			</div>
-		</div>		
-		
+		</div>			
 		<div class="container" style="margin-top:30px;">
 			<div class="row">
-				<h3 class="col-md-12">Edita la información de la farmacia:</h3>
+				<h3 class="col-md-12" style="margin-bottom:20px;">Edita la información de la farmacia:</h3>
 				<form action="../DSS-P4/FarmaciasServlet" method="POST">
 					<input name="ID" type="hidden" value="<%= ID %>" />  	
 					<div class="form-group row">

@@ -23,8 +23,8 @@
 		<%
 			String ID = request.getParameter("ID");
 			String nombre = request.getParameter("nombre");
-			String latitud = request.getParameter("latitud");
-			String longitud = request.getParameter("longitud");
+			String cantidad = request.getParameter("cantidad");
+			String precio = request.getParameter("precio");
 		%>		
 	</head>
 	<body>		
@@ -56,36 +56,35 @@
 		</nav>		
 		<div class="header estiloHeader">
 			<div class="container">
-				<div class="col-md-6 offset-md-2 estiloHeaderH1">
+				<div class="col-md-6 offset-md-3 estiloHeaderH1">
 					<h1 style="text-align: center;">Consorcio Farmacias</h1>
 				</div>
 			</div>
-		</div>		
-		
+		</div>			
 		<div class="container" style="margin-top:30px;">
 			<div class="row">
-				<h3 class="col-md-12">Edita la información de la farmacia:</h3>
-				<form action="../DSS-P4/FarmaciasServlet" method="POST">
+				<h3 class="col-md-12" style="margin-bottom:20px;">Edita la información de la farmacia:</h3>
+				<form action="../DSS-P4/ProductosServlet" method="POST">
 					<input name="ID" type="hidden" value="<%= ID %>" />  	
 					<div class="form-group row">
 					  <label class="col-2 col-form-label">Nombre</label>
 					  <div class="col-md-8" style="margin-left:50px;">
-					    <input class="form-control" type="text" name="farmaciaNombre" placeholder="<%= nombre %>" value="<%= nombre %>">
+					    <input class="form-control" type="text" name="productoNombre" placeholder="<%= nombre %>" value="<%= nombre %>">
 					  </div>
 					</div>
 					<div class="form-group row">
-					  <label class="col-2 col-form-label">Latitud</label>
+					  <label class="col-2 col-form-label">Cantidad</label>
 					  <div class="col-8" style="margin-left:50px;">
-					    <input class="form-control" type="text" name="farmaciaLatitud" placeholder="<%= latitud %>" value="<%= latitud %>">
+					    <input class="form-control" type="text" name="productoCantidad" placeholder="<%= cantidad %>" value="<%= cantidad %>">
 					  </div>
 					</div>
 					<div class="form-group row">
-					  <label class="col-2 col-form-label">Longitud</label>
+					  <label class="col-2 col-form-label">Precio</label>
 					  <div class="col-8" style="margin-left:50px;">
-					    <input class="form-control" type="text" name="farmaciaLongitud" placeholder="<%= longitud %>" value="<%= longitud %>" >
+					    <input class="form-control" type="text" name="productoPrecio" placeholder="<%= precio %>" value="<%= precio %>" >
 					  </div>
 					</div>	
-					<input name="opcionServlet" type="hidden" value="editarFarmacias" />  						   
+					<input name="opcionServlet" type="hidden" value="editarProductos" />  						   
 			        <div class="form-group">
 			            <button type="submit" class="btn btn-primary btn-block">Editar</button>
 			        </div>						
