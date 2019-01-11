@@ -14,7 +14,8 @@
 		<script type="text/javascript"> 
 			$(document).ready(function() {		 
 				$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });
-				$.get("../DSS-P4/OrdersServlet?opcionServlet=getPedidos",function(response) { });		 
+				$.get("../DSS-P4/OrdersServlet?opcionServlet=getPedidos",function(response) { });
+				$.get("../DSS-P4/ProductosServlet?opcionServlet=getProductos",function(response) { });
 			});
 		</script>
 	</head>
@@ -50,9 +51,9 @@
 					<h1 style="text-align: center;">Consorcio Farmacias</h1>
 				</div>
 			</div>
-		</div>
-		
-		<h1>PRINCIPAL</h1>		
-  		
+		</div>		
+		<div class="container">
+			<div class="imagenPrincipal"></div>		
+		</div>	  		
 	</body>
 </html>

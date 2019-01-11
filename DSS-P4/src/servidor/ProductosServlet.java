@@ -1,8 +1,6 @@
 package servidor;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +18,10 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 
 
-@WebServlet("/FarmaciasServlet")
-public class FarmaciasServlet extends HttpServlet {
+@WebServlet("/ProductosServlet")
+public class ProductosServlet extends HttpServlet {
 	
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 	private String URL = "http://localhost:8080/DSS-P4/rest";
 	private String opcion;
 	Gson gson = new Gson();
@@ -32,9 +30,10 @@ public class FarmaciasServlet extends HttpServlet {
 	Client client = ClientBuilder.newClient();
 	WebTarget servicio;
 	Response respuesta;
-	HttpServletResponse responseRedirect;       
-    
-    public FarmaciasServlet() {
+	HttpServletResponse responseRedirect; 
+       
+
+    public ProductosServlet() {
         super();
     }
 
@@ -62,8 +61,9 @@ public class FarmaciasServlet extends HttpServlet {
 			
 			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");
 			break;
-		}		
+		}
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -97,6 +97,7 @@ public class FarmaciasServlet extends HttpServlet {
 			response.sendRedirect("http://localhost:8080/DSS-P4/principal.jsp");			
 			break;
 			
-		}		
+		}
 	}
+
 }

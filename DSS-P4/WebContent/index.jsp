@@ -14,7 +14,8 @@
 		<script type="text/javascript"> 
 			$(document).ready(function() {		 
 				$.get("../DSS-P4/FarmaciasServlet?opcionServlet=getFarmacias",function(response) { });	
-				$.get("../DSS-P4/OrdersServlet?opcionServlet=getPedidos",function(response) { });		 
+				$.get("../DSS-P4/OrdersServlet?opcionServlet=getPedidos",function(response) { });		
+				$.get("../DSS-P4/ProductosServlet?opcionServlet=getProductos",function(response) { });
 			});
 		</script>
 	</head>

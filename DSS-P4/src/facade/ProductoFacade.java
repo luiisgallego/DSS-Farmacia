@@ -50,7 +50,7 @@ public class ProductoFacade {
 			pstmt.setInt(2, p.getCantidad());
 			pstmt.setInt(3, p.getPrecio());
 			pstmt.setString(4, p.getImagen());
-			
+			System.out.println(pstmt);
 			pstmt.execute();
 			this.con.close();
 			return true;
@@ -72,6 +72,7 @@ public class ProductoFacade {
 			pstmt.setInt(3, p.getPrecio());
 			pstmt.setString(4, p.getImagen());
 			pstmt.setInt(5, p.getID());
+			System.out.println(pstmt);
 			pstmt.execute();
 			
 			this.con.close();
@@ -90,7 +91,7 @@ public class ProductoFacade {
 			pstmt= this.con.prepareStatement(deleteProducto);
 			pstmt.setInt(1, p.getID());
 			pstmt.execute();
-			
+			System.out.println(pstmt);
 			this.con.close();
 			return true;
 			

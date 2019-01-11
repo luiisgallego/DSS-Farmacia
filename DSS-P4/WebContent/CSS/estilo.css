@@ -65,3 +65,9 @@
 .navegacionEstilo ul li {
 	padding-left:20px;
 }
+
+.imagenPrincipal {
+	height: 700px;
+	background-image: url("../imagenes/farmaciasdeguardia.jpg");
+}
+
