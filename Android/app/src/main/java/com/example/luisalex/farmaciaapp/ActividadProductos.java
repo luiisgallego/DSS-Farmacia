@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.example.luisalex.farmaciaapp.modelo.Order;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +38,9 @@ public class ActividadProductos extends AppCompatActivity {
         setTitle("Productos");
 
         registerForContextMenu(lv);
+
+        Order pedido = new Order(1,20,16,7,3);
+        new HTTPPostPedido(pedido).execute();
 
     }
 
@@ -70,7 +75,8 @@ public class ActividadProductos extends AppCompatActivity {
 
             if (cadenaJSON != null) {
                 try {
-                    JSONArray f = new JSONArray(cadenaJSON);
+                    JSONObject jObj = new JSONObject(cadenaJSON);
+                    JSONArray f = jObj.getJSONArray("productos");
 
                     for (int i = 0; i < f.length(); i++) {
                         JSONObject farmacia = f.getJSONObject(i);
@@ -116,5 +122,23 @@ public class ActividadProductos extends AppCompatActivity {
             lv.setAdapter(adapter);
         }
 
+    }
+
+    public class HTTPPostPedido extends AsyncTask <Void, Void, Void>{
+
+        private Order pedido;
+
+        public HTTPPostPedido(Order pedido){this.pedido=pedido;}
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            REST rest = new REST();
+            try {
+                rest.postPedido(pedido.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

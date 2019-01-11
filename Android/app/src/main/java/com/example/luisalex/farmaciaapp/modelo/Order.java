@@ -63,4 +63,12 @@ public class Order {
 	public void setUsuarioID(int usuarioID) {
 		this.usuarioID = usuarioID;
 	}
+
+	@Override
+	public String toString() {
+		return "orderPrecio=" + this.precio + "&" +
+				"orderUsuarioID=" + this.usuarioID + "&" +
+				"orderProductoID=" + this.productoID + "&" +
+				"orderFarmaciaID=" + this.farmaciaID;
+	}
 }
