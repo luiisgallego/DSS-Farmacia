@@ -33,14 +33,7 @@ public class Main extends AppCompatActivity {
         botonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!emptyValidation()) {
-                    dbHelper.addUsuario(new UsuarioInicio(textNick.getText().toString(), textPass.getText().toString()));
-                    Toast.makeText(Main.this, "UsuarioInicio añadido", Toast.LENGTH_SHORT).show();
-                    textNick.setText("");
-                    textPass.setText("");
-                }else{
-                    Toast.makeText(Main.this, "Campos Vacíos", Toast.LENGTH_SHORT).show();
-                }
+                startActivity(new Intent(Main.this, ActividadRegistro.class));
             }
         });
         botonLogIn.setOnClickListener(new View.OnClickListener() {

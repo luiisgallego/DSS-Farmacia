@@ -77,15 +77,7 @@ public class REST{
 
     }
 
-    public void postUsuario(Usuario usuario) throws Exception {
-        JSONObject usuarioParams = new JSONObject();
-        usuarioParams.put("nombre",usuario.getNombre());
-        usuarioParams.put("nick",usuario.getNick());
-        usuarioParams.put("pass",usuario.getPass());
-        usuarioParams.put("rol",usuario.getRol());
-        usuarioParams.put("email",usuario.getEmail());
-
-        Log.e(RESTLOG,usuarioParams.toString());
+    public void postUsuario(String stringUsuario) throws Exception {
 
         URL url = new URL("http://192.168.0.158:8080/DSS-P4/rest/usuarios/registro");
         //realizamos la conexión para recibir el json
@@ -93,16 +85,13 @@ public class REST{
         conexion.setConnectTimeout(15000 /* milliseconds */);
         conexion.setRequestMethod("POST");
         conexion.setRequestProperty("User-Agent", USER_AGENT);
-        conexion.setRequestProperty("Content-Type", "application/json");
+        //conexion.setRequestProperty("Content-Type", "application/json");
 
         // For POST only - START
         conexion.setDoOutput(true);
         OutputStream os = conexion.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(getPostDataString(usuarioParams));
-
-        writer.flush();
-        writer.close();
+        os.write(stringUsuario.getBytes());
+        os.flush();
         os.close();
 
         // Comprobamos que el recurso accedido es correcto
