@@ -65,6 +65,7 @@ public class FarmaciaFacade {
 			pstmt.setFloat(2, f.getLatitud());
 			pstmt.setFloat(3, f.getLongitud());
 			pstmt.setInt(4, f.getID());
+			System.out.println(pstmt);
 			pstmt.execute();
 			
 			this.con.close();

@@ -49,6 +49,21 @@ public class Farmacias {
 		else return Response.status(404).build();				 
 	}
 	
+	@PUT	// EDITAR
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response putFarmacia(@FormParam("ID") int ID,
+			@FormParam("nombre") String nombre,
+			@FormParam("latitud") float latitud,
+			@FormParam("longitud") float longitud,
+			@Context HttpServletResponse servletResponse) throws IOException{
+		
+		Farmacia farmacia = new Farmacia(ID, nombre, latitud, longitud); 
+		boolean postOK = farmaciaFacade.updateFarmacia(farmacia);	
+		
+		if(postOK) return Response.status(200).build();
+		else return Response.status(404).build();				 
+	}
+	
 	@GET	
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getFarmacias(){
